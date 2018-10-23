@@ -1,4 +1,3 @@
 #!/bin/bash
 
-docker run -it --rm --name 1dayintern -v `pwd`/chatapp:/chatapp s_ichinose/1dayintern
-
+docker run -itd --rm --name 1dayintern -v `pwd`/chatapp:/chatapp -p 4200:4200 s_ichinose/1dayintern

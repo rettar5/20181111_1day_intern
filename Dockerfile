@@ -7,6 +7,6 @@ CMD echo 'Now running...'; \
     cd /chatapp; \
     echo 'Installing @angular/cli path.'; ln -s /chatapp/node_modules/.bin/ng /bin/; \
     echo 'Installed'; \
-    /bin/ash;
+    ng serve
 
-EXPOSE 4200:4200
+EXPOSE 4200
