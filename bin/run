@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker run -it --rm --name 1dayintern -v `pwd`/chatapp:/chatapp s_ichinose/1dayintern
+
