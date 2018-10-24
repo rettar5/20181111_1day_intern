@@ -1,0 +1,56 @@
+
+$toggleHeight: 5rem;
+$timelinePadding: 0px 2rem;
+$borderColor: rgba(255, 255, 255, 0.12);
+
+.main {
+  height: 100vh;
+  width: 100vw;
+
+  &_submenu {
+    width: 300px;
+  }
+
+  &_timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    &_toggle {
+      position: sticky;
+      width: 1rem;
+      height: $toggleHeight;
+      top: 0.5rem;
+      left: -1px;
+      border: solid 1px $borderColor;
+      background-color: #424242;
+      cursor: pointer;
+      flex: none;
+    }
+
+    &_messages {
+      margin-top: $toggleHeight * -1;
+      padding: $timelinePadding;
+      flex: auto;
+      overflow: auto;
+    }
+
+    &_form {
+      padding: $timelinePadding;
+      margin: 1rem 0px;
+      flex: none;
+      display: flex;
+
+      &_input {
+        flex: auto;
+        padding: 0px 0.5rem;
+      }
+
+      &_button {
+        flex: none;
+        margin-left: 1rem;
+      }
+    }
+  }
+}

@@ -8,7 +8,10 @@ import { BaseComponent } from '../base/base.component';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent extends BaseComponent implements OnInit {
+  /** ユーザ情報の一覧 */
   userDataMap: Map<string, UserData> = new Map();
+  /** メニューの表示フラグ */
+  shouldShowMenu: boolean = true;
 
   constructor(private users: UsersService) {
     super();

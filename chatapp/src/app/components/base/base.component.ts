@@ -2,8 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-base',
-  templateUrl: './base.component.html',
-  styleUrls: ['./base.component.scss']
+  template: ``
 })
 export class BaseComponent implements OnDestroy {
   private _unsubscribeFuncList: (() => void)[] = [];
