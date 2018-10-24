@@ -1,0 +1,9 @@
+/** Should complete configuration of authentication!!! */
+export const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
+};
