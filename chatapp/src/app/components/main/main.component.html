@@ -1,0 +1,10 @@
+<div>
+  <div *ngFor='let userData of getArray(userDataMap?.values())'>
+    <img [src]='userData.picture' style='width: 1rem; height: 1rem; border-radius: 50%;'>
+    {{ userData.name }}
+  </div>
+</div>
+
+<br />
+
+<a routerLink='/login'>move to login</a>

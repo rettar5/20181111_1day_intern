@@ -10,14 +10,16 @@ import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { firebaseConfig } from '../environments/firebase.config';
-import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { BaseComponent } from './components/base/base.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
