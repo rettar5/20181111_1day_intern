@@ -1,0 +1,15 @@
+<div class='timeline'>
+  <ng-container *ngIf='isLoading; else loadedBlock'>
+    <mat-spinner class='timeline_progress'></mat-spinner>
+  </ng-container>
+
+  <ng-template #loadedBlock>
+    <div *ngFor='let message of getArray(messageDataMap.values())'>
+      {{ message.text }}
+    </div>
+
+    <div *ngIf='messageDataMap.size < 1'>
+      メッセージがありません。
+    </div>
+  </ng-template>
+</div>

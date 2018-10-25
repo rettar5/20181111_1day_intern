@@ -17,6 +17,7 @@ import { LoginUserProfileComponent } from './components/login-user-profile/login
 import { MessageInputComponent } from './components/message-input/message-input.component';
 import { GroupsComponent, GroupRegisterDialogComponent } from './components/groups/groups.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginUserProfileComponent,
     MessageInputComponent,
     GroupsComponent,
-    GroupRegisterDialogComponent
+    GroupRegisterDialogComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,

@@ -18,13 +18,12 @@
 
     <!-- 投稿済みメッセージ一覧 -->
     <div class='main_timeline_messages'>
-      <!-- TODO: コンポーネント化 -->
-      hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>
+      <app-timeline [user]='loginUser' [group]='selectedGroup'></app-timeline>
     </div>
 
     <!-- メッセージ入力欄 -->
     <div class='main_timeline_form'>
-      <app-message-input [user]='loginUser'></app-message-input>
+      <app-message-input [user]='loginUser' [group]='selectedGroup'></app-message-input>
     </div>
   </div>
 </mat-drawer-container>

@@ -16,6 +16,8 @@ export class MainComponent extends BaseComponent implements OnInit {
   shouldShowMenu: boolean = true;
   /** ログイン中のユーザ情報 */
   loginUser: UserData;
+  /** 選択中のグループ情報 */
+  selectedGroup: GroupData;
   /** リトライを行った回数 */
   private retryCount: number = 0;
 
@@ -55,6 +57,6 @@ export class MainComponent extends BaseComponent implements OnInit {
    * @param group 選択されたグループ
    */
   onGroupSelected(group: GroupData) {
-    console.log('onGroupSelected ', group);
+    this.selectedGroup = group;
   }
 }
