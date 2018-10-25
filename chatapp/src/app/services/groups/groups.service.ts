@@ -17,7 +17,7 @@ export class GroupsService {
    * @param complete
    */
   observeGroupsInfo(obsrever: (snapshot: firebase.firestore.QuerySnapshot) => void, error?: (error: Error) => void, complete?: () => void): () => void {
-    return this.afs.collection(FirestoreKeys.groupsInfo).ref.orderBy('updatedAt', 'desc').limit(100).onSnapshot(obsrever, error, complete);
+    return this.afs.collection(FirestoreKeys.groupsInfo).ref.orderBy('createdAt').limit(100).onSnapshot(obsrever, error, complete);
   }
 
   /** グループを新規作成

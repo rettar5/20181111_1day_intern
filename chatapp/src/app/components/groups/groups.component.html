@@ -1,20 +1,22 @@
 <div class='groups'>
-  <!-- ロード中 -->
-  <ng-container *ngIf='isLoading'>
+  <!-- ロード中の表示 -->
+  <ng-container *ngIf='isLoading; else loadedBlock'>
     <mat-spinner class='groups_progress'></mat-spinner>
   </ng-container>
 
-  <!-- グループ一覧 -->
-  <mat-selection-list #selectionList class='groups_selection'>
-    <mat-list-option *ngFor='let group of getArray(groupDataMap?.values()); let isFirst = first' class='groups_selection_list' [selected]='isFirst'>
-      {{ group.name }}
-    </mat-list-option>
-  </mat-selection-list>
+  <!-- ロード完了後の表示 -->
+  <ng-template #loadedBlock>
+    <!-- グループ一覧 -->
+    <mat-selection-list class='groups_selection'>
+      <mat-list-option *ngFor='let group of getArray(groupDataMap?.values()); let idx = index'
+        class='groups_selection_list' (click)='onGroupListClick($event, group, idx)' [class.selected]='idx == selectedIndex'>
+        {{ group.name }}
+      </mat-list-option>
+    </mat-selection-list>
 
-  <!-- グループ新規作成ボタン -->
-  <ng-container *ngIf='!isLoading'>
+    <!-- グループ新規作成ボタン -->
     <button mat-button class='groups_button' (click)='onRegisterButtonClick($event)'>
       <mat-icon>add</mat-icon>
     </button>
-  </ng-container>
+  </ng-template>
 </div>

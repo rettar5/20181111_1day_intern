@@ -4,6 +4,7 @@ import { BaseComponent } from '../base/base.component';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
 import { RetryConfig } from 'src/app/services/common/common.service';
 import { Router } from '@angular/router';
+import { GroupData } from 'src/app/services/groups/groups.service';
 
 @Component({
   selector: 'app-main',
@@ -47,5 +48,13 @@ export class MainComponent extends BaseComponent implements OnInit {
         }, RetryConfig.interval);
       }
     });
+  }
+
+  /** グループが選択された際
+   *
+   * @param group 選択されたグループ
+   */
+  onGroupSelected(group: GroupData) {
+    console.log('onGroupSelected ', group);
   }
 }

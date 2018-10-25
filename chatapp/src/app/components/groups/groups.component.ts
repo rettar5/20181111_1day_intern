@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output, Inject } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
-import { MatSelectionList, MatListOption, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
 import { GroupsService, GroupData } from 'src/app/services/groups/groups.service';
 import { FormControl, Validators } from '@angular/forms';
@@ -19,9 +18,7 @@ interface DialogData {
 export class GroupsComponent extends BaseComponent implements OnInit {
   @Input() user: UserData;
   /** 選択中のグループが切り替わった際のイベント通知 */
-  @Output('onChange') onChangeEmitter: EventEmitter<string> = new EventEmitter();
-  /** テンプレート内の<mat-selection-list>の参照 */
-  @ViewChild(MatSelectionList) selectionList: MatSelectionList;
+  @Output('onChange') onChangeEmitter: EventEmitter<GroupData> = new EventEmitter();
 
   /** 取得したグループの一覧 */
   groupDataMap: Map<string, GroupData> = new Map();
@@ -29,6 +26,8 @@ export class GroupsComponent extends BaseComponent implements OnInit {
   isLoading: boolean = true;
   /** リトライを行った回数 */
   private retryCount: number = 0;
+  /** 選択中のインデックス */
+  selectedIndex: number = 0;
 
   constructor(private groupsInfo: GroupsService,
               private dialog: MatDialog) {
@@ -36,8 +35,6 @@ export class GroupsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // リストを単一選択に変更
-    this.selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
     // グループ一覧を監視
     this.observeGroupsInfo();
   }
@@ -46,12 +43,17 @@ export class GroupsComponent extends BaseComponent implements OnInit {
   private observeGroupsInfo() {
     const func = this.groupsInfo.observeGroupsInfo((querySnapshot) => {
       // 監視を始めた直後 + データの更新の度に呼び出されるコールバック
-      this.isLoading = false;
       querySnapshot.forEach((queryDocumentSnapShot) => {
         // Snapshotからグループデータを生成
         const groupData = new GroupData(queryDocumentSnapShot);
         this.groupDataMap.set(groupData.id, groupData);
       });
+
+      if (this.isLoading) {
+        // groupDataMapの一番最初のグループが選択されたことを通知
+        this.emitOnChange(this.groupDataMap.values().next().value);
+      }
+      this.isLoading = false;
     }, (err) => {
       this.isLoading = false;
       console.error(err);
@@ -65,7 +67,6 @@ export class GroupsComponent extends BaseComponent implements OnInit {
    * @param event
    */
   onRegisterButtonClick(event: MouseEvent) {
-    // TODO: グループの新規作成
     this.openGroupRegisterDialog();
   }
 
@@ -105,6 +106,25 @@ export class GroupsComponent extends BaseComponent implements OnInit {
         }, RetryConfig.interval);
       }
     });
+  }
+
+  /** グループ名がクリックされた際
+   *
+   * @param event
+   * @param group 選択されたグループ情報
+   * @param index 選択されたインデックス
+   */
+  onGroupListClick(event: MouseEvent, group: GroupData, index: number) {
+    this.selectedIndex = index;
+    this.emitOnChange(group);
+  }
+
+  /** グループが選択されたことを通知
+   *
+   * @param group 選択されたグループ情報
+   */
+  private emitOnChange(group: GroupData) {
+    this.onChangeEmitter.next(group);
   }
 }
 
