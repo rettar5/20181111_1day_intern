@@ -1,0 +1,12 @@
+<div class='groups'>
+  <mat-selection-list #selectionList class='groups_selection'>
+    <mat-list-option *ngFor='let name of _groupNames; let isFirst = first' class='groups_selection_list' [selected]='isFirst'>
+      {{ name }}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <!-- グループ新規作成ボタン -->
+  <button mat-button class='groups_button' (click)='onRegisterButtonClick($event)'>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

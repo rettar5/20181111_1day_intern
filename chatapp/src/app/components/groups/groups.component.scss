@@ -1,0 +1,21 @@
+@import '../../../assets/scss/variables.scss';
+
+.groups {
+  &_selection {
+    &_list {
+      &[aria-selected='true'] {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  &_button {
+    width: 100%;
+    border-radius: 0px;
+    color: $fontCaptionColor;
+  }
+}
+
+:host /deep/ .groups .mat-pseudo-checkbox {
+  display: none;
+}

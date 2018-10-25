@@ -5,7 +5,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatListModule, MatIconModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { MainComponent } from './components/main/main.component';
 import { BaseComponent } from './components/base/base.component';
 import { LoginUserProfileComponent } from './components/login-user-profile/login-user-profile.component';
 import { MessageInputComponent } from './components/message-input/message-input.component';
+import { GroupsComponent } from './components/groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MessageInputComponent } from './components/message-input/message-input.
     MainComponent,
     BaseComponent,
     LoginUserProfileComponent,
-    MessageInputComponent
+    MessageInputComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,8 @@ import { MessageInputComponent } from './components/message-input/message-input.
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
