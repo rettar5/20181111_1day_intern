@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService, UserData } from 'src/app/services/users/users.service';
 import { BaseComponent } from '../base/base.component';
+import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
+import { RetryConfig } from 'src/app/services/common/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -8,30 +11,54 @@ import { BaseComponent } from '../base/base.component';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent extends BaseComponent implements OnInit {
-  /** ユーザ情報の一覧 */
-  userDataMap: Map<string, UserData> = new Map();
   /** メニューの表示フラグ */
   shouldShowMenu: boolean = true;
+  /** ログイン中のユーザ情報 */
+  loginUser: UserData;
+  /** リトライを行った回数 */
+  private retryCount: number = 0;
 
-  constructor(private users: UsersService) {
+  constructor(private users: UsersService,
+              private router: Router) {
     super();
   }
 
   ngOnInit() {
-    this.observeUserData();
+    this.fetchLoginUserData();
   }
 
-  /** Firestoreからユーザ情報を取得・変更を監視 */
-  private observeUserData() {
-    // ユーザ情報の一覧を取得
-    const unsubscribeFunc = this.users.observeUserData((snapshot: firebase.firestore.QuerySnapshot) => {
-      // 一覧からユーザ情報を1件ずつ取得
-      snapshot.forEach((documentSnapshot: firebase.firestore.QueryDocumentSnapshot) => {
-        const userData = new UserData(documentSnapshot);
-        this.userDataMap.set(userData.id, userData);
-      });
-    });
+  /** Firestoreからユーザ情報を取得 */
+  private fetchLoginUserData() {
+    // ログイン中のユーザIDを、ローカルストレージから取得
+    const loginId = DataStoreService.getItem(LocalStorageKey.loginId);
+    // ユーザIDを使ってFirestoreからユーザ情報を取得
+    this.users.fetchUserData(loginId).subscribe((snapshot) => {
+      this.retryCount = 0;
+      this.loginUser = new UserData(snapshot);
+    }, (err) => {
+      // 取得に失敗した際
+      console.error(err);
 
-    this.setAutoStopSubscription(unsubscribeFunc);
+      // 一定回数内であれば取得処理をリトライ
+      if (this.retryCount < RetryConfig.max) {
+        this.retryCount++;
+        setTimeout(() => {
+          this.fetchLoginUserData();
+        }, RetryConfig.interval);
+      }
+    });
+  }
+
+  /** ログアウトのリンクをクリックした際 */
+  onLogoutButtonClick(event: MouseEvent) {
+    this.logout();
+  }
+
+  /** ログアウト */
+  private logout() {
+    // ローカルストレージに保存したすべてのデータを削除
+    DataStoreService.clear();
+    // ログイン画面に遷移
+    this.router.navigate(['/login']);
   }
 }

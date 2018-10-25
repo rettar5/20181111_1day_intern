@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { UsersService, GoogleUserProfile } from 'src/app/services/users/users.service';
+import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,6 @@ export class LoginComponent implements OnInit {
   hasError: boolean = false;
 
   constructor(private afAuth: AngularFireAuth,
-              private cd: ChangeDetectorRef,
               private router: Router,
               private users: UsersService,
               private ngZone: NgZone) { }
@@ -35,7 +35,10 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((data) => {
       // Googleアカウントでの認証完了
-      return this.users.setUserData(data.additionalUserInfo.profile as GoogleUserProfile);
+      const profile = data.additionalUserInfo.profile as GoogleUserProfile;
+      // ログインしたユーザのIDを、ローカルストレージに保存
+      DataStoreService.setItem(LocalStorageKey.loginId, profile.id);
+      return this.users.setUserData(profile);
     }).then(() => {
       // Firestoreへのデータ登録完了
       this.moveToMain();
@@ -43,7 +46,6 @@ export class LoginComponent implements OnInit {
       // 例外発生時
       console.error('reason: ', reason);
       this.hasError = true;
-      this.cd.detectChanges();
     });
   }
 

@@ -20,7 +20,7 @@ export class BaseComponent implements OnDestroy {
    *
    * @param func onSnapshot()から取得した監視停止用の関数
    */
-  setAutoStopSubscription(func: () => void) {
+  addSnapshotAutoRemover(func: () => void) {
     this._unsubscribeFuncList.push(func);
   }
 

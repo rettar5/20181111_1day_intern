@@ -6,17 +6,17 @@
       Toggle extra text
     </button>
 
-    <a routerLink='/login'>move to login</a>
+    <div>
+      <img *ngIf='loginUser?.picture' [src]='loginUser?.picture' style='width: 1rem; height: 1rem; border-radius: 50%;'>
+      {{ loginUser?.name }}
+    </div>
+    <button mat-raised-button (click)='onLogoutButtonClick($event)'>Logout</button>
   </mat-drawer>
 
   <div class="main_timeline">
     <div class='main_timeline_toggle' (click)="shouldShowMenu = !shouldShowMenu"></div>
 
     <div class='main_timeline_messages'>
-      <div *ngFor='let userData of getArray(userDataMap?.values())'>
-        <img [src]='userData.picture' style='width: 1rem; height: 1rem; border-radius: 50%;'>
-        {{ userData.name }}
-      </div>
       hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>
     </div>
 

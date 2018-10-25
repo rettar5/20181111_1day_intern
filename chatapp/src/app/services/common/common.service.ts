@@ -22,3 +22,8 @@ export class SnapshotData extends CommonData {
 export enum FirestoreKeys {
   users = 'users'
 }
+
+export enum RetryConfig {
+  max = 5,
+  interval = 3
+}

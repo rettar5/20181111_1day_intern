@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SnapshotData, FirestoreKeys } from '../common/common.service';
+import { Observable } from 'rxjs';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,15 @@ export class UsersService {
    */
   observeUserData(obsrever: (snapshot: firebase.firestore.QuerySnapshot) => void, error?: (error: Error) => void, complete?: () => void): () => void {
     return this.afs.collection(FirestoreKeys.users).ref.orderBy('id').limit(100).onSnapshot(obsrever, error, complete);
+  }
+
+  /** Firestoreからユーザ情報を取得
+   *
+   * @param id ユーザID
+   */
+  fetchUserData(id: string): Observable<firebase.firestore.DocumentSnapshot> {
+    const doc = this.afs.doc<UserData>(FirestoreKeys.users + '/' + id);
+    return doc.get();
   }
 }
 
@@ -51,7 +62,7 @@ export class UserData extends SnapshotData implements GoogleUserProfile {
   picture: string;
   verified_email: boolean;
 
-  constructor(snapshot: firebase.firestore.QueryDocumentSnapshot) {
+  constructor(snapshot: firebase.firestore.QueryDocumentSnapshot | firebase.firestore.DocumentSnapshot) {
     super(snapshot);
   }
 }
