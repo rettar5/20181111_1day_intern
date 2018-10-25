@@ -22,8 +22,16 @@
   }
 }
 
-:host /deep/ .groups .mat-pseudo-checkbox {
-  display: none;
+:host /deep/ .groups {
+  .mat-pseudo-checkbox {
+    display: none;
+  }
+
+  &_button.cdk-focused.cdk-program-focused {
+    .mat-button-focus-overlay {
+      display: none;
+    }
+  }
 }
 
 .dialog {
