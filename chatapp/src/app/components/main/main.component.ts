@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService, UserData } from 'src/app/services/users/users.service';
 import { BaseComponent } from '../base/base.component';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
-import { RetryConfig } from 'src/app/services/common/common.service';
+import { RetryConfig, AuthSsrvice } from 'src/app/services/common/common.service';
 import { Router } from '@angular/router';
 import { GroupData } from 'src/app/services/groups/groups.service';
 
@@ -22,7 +22,7 @@ export class MainComponent extends BaseComponent implements OnInit {
   private retryCount: number = 0;
 
   constructor(private users: UsersService,
-              private router: Router) {
+              private authService: AuthSsrvice) {
     super();
   }
 
@@ -48,6 +48,9 @@ export class MainComponent extends BaseComponent implements OnInit {
         setTimeout(() => {
           this.fetchLoginUserData();
         }, RetryConfig.interval);
+      } else {
+        // リトライ上限を超えた際はログアウトする
+        this.authService.logout();
       }
     });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
 import { DataStoreService } from 'src/app/services/data-store/data-store.service';
 import { Router } from '@angular/router';
+import { AuthSsrvice } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-login-user-profile',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginUserProfileComponent implements OnInit {
   @Input() user: UserData;
 
-  constructor(private router: Router) { }
+  constructor(private authService: AuthSsrvice) { }
 
   ngOnInit() {
   }
@@ -23,9 +24,6 @@ export class LoginUserProfileComponent implements OnInit {
 
   /** ログアウト */
   private logout() {
-    // ローカルストレージに保存したすべてのデータを削除
-    DataStoreService.clear();
-    // ログイン画面に遷移
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

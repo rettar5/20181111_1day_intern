@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, EventEmitter, Output, Inject } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output, Inject, OnChanges } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
@@ -41,6 +41,7 @@ export class GroupsComponent extends BaseComponent implements OnInit {
 
   /** グループ情報一覧を監視 */
   private observeGroupsInfo() {
+    this.isLoading = true;
     const func = this.groupsInfo.observeGroupsInfo((querySnapshot) => {
       // 監視を始めた直後 + データの更新の度に呼び出されるコールバック
       querySnapshot.forEach((queryDocumentSnapShot) => {
