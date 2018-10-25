@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { firestore } from 'firebase/app';
 
 @Component({
   selector: 'app-base',
@@ -20,7 +21,7 @@ export class BaseComponent implements OnDestroy {
    *
    * @param func onSnapshot()から取得した監視停止用の関数
    */
-  addSnapshotAutoRemover(func: () => void) {
+  addObserveAutoRemover(func: () => void) {
     this._unsubscribeFuncList.push(func);
   }
 
@@ -30,5 +31,13 @@ export class BaseComponent implements OnDestroy {
    */
   getArray(map: Map<string, any>): any[] {
     return Array.from(map);
+  }
+
+  /** タイミングをずらして処理を実行
+   *
+   * @param action
+   */
+  shiftAction(action: () => void) {
+    setTimeout(action);
   }
 }

@@ -5,7 +5,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatListModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatListModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,8 @@ import { MainComponent } from './components/main/main.component';
 import { BaseComponent } from './components/base/base.component';
 import { LoginUserProfileComponent } from './components/login-user-profile/login-user-profile.component';
 import { MessageInputComponent } from './components/message-input/message-input.component';
-import { GroupsComponent } from './components/groups/groups.component';
+import { GroupsComponent, GroupRegisterDialogComponent } from './components/groups/groups.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,14 @@ import { GroupsComponent } from './components/groups/groups.component';
     BaseComponent,
     LoginUserProfileComponent,
     MessageInputComponent,
-    GroupsComponent
+    GroupsComponent,
+    GroupRegisterDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     // Angular Fire
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
@@ -44,8 +48,13 @@ import { GroupsComponent } from './components/groups/groups.component';
     MatInputModule,
     MatListModule,
     MatIconModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    GroupRegisterDialogComponent,
+  ]
 })
 export class AppModule { }

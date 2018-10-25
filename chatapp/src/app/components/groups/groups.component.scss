@@ -1,6 +1,10 @@
 @import '../../../assets/scss/variables.scss';
 
 .groups {
+  &_progress {
+    margin: 2rem auto;
+  }
+
   &_selection {
     &_list {
       &[aria-selected='true'] {
@@ -18,4 +22,17 @@
 
 :host /deep/ .groups .mat-pseudo-checkbox {
   display: none;
+}
+
+.dialog {
+  &_content {
+    &_form {
+      width: 100%;
+    }
+  }
+
+  &_actions {
+    display: flex;
+    justify-content: space-around;
+  }
 }

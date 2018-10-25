@@ -1,31 +1,109 @@
-import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output, Inject } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
-import { MatSelectionList, MatListOption } from '@angular/material';
+import { MatSelectionList, MatListOption, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
+import { BaseComponent } from '../base/base.component';
+import { GroupsService, GroupData } from 'src/app/services/groups/groups.service';
+import { FormControl, Validators } from '@angular/forms';
+
+interface DialogData {
+  name: string;
+}
 
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent extends BaseComponent implements OnInit {
   @Input() user: UserData;
+  /** 選択中のグループが切り替わった際のイベント通知 */
   @Output('onChange') onChangeEmitter: EventEmitter<string> = new EventEmitter();
   /** テンプレート内の<mat-selection-list>の参照 */
   @ViewChild(MatSelectionList) selectionList: MatSelectionList;
 
-  _groupNames: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  /** 取得したグループの一覧 */
+  groupDataMap: Map<string, GroupData> = new Map();
+  /** データ読込中フラグ */
+  isLoading: boolean = true;
 
-  constructor() { }
+  constructor(private groupsInfo: GroupsService,
+              private dialog: MatDialog) {
+    super();
+  }
 
   ngOnInit() {
     // リストを単一選択に変更
     this.selectionList.selectedOptions = new SelectionModel<MatListOption>(false);
-
-    // TODO: グループ一覧を監視する処理を追加
+    // グループ一覧を監視
+    this.observeGroupsInfo();
   }
 
+  /** グループ情報一覧を監視 */
+  private observeGroupsInfo() {
+    const func = this.groupsInfo.observeGroupsInfo((querySnapshot) => {
+      // 監視を始めた直後 + データの更新の度に呼び出されるコールバック
+      this.isLoading = false;
+      querySnapshot.forEach((queryDocumentSnapShot) => {
+        // Snapshotからグループデータを生成
+        const groupData = new GroupData(queryDocumentSnapShot);
+        this.groupDataMap.set(groupData.id, groupData);
+      });
+    }, (err) => {
+      this.isLoading = false;
+      console.error(err);
+    });
+    // コンポーネント破棄時に監視を止めるよう設定
+    this.addObserveAutoRemover(func);
+  }
+
+  /** グループ新規作成ボタンが押された際
+   *
+   * @param event
+   */
   onRegisterButtonClick(event: MouseEvent) {
     // TODO: グループの新規作成
+    this.openGroupRegisterDialog();
+  }
+
+  /** グループ名入力用のダイアログを表示 */
+  private openGroupRegisterDialog() {
+    const dialogRef = this.dialog.open(GroupRegisterDialogComponent, {
+      // ダイアログの初期値
+      data: { name: '' }
+    });
+
+    dialogRef.afterClosed().subscribe((groupName) => {
+      // ダイアログを閉じた際のコールバック
+      if (groupName) {
+        // グループ名が入力されていればグループを作成
+        this.registerGroup(groupName);
+      }
+    });
+  }
+
+  /** グループを新規作成
+   *
+   * @param groupName 作成するグループ名
+   */
+  private registerGroup(groupName: string) {
+    console.log('register group!!!!! groupName: ' + groupName);
+  }
+}
+
+
+@Component({
+  selector: 'app-groups-register-dialog',
+  templateUrl: './groups-register-dialog.component.html',
+  styleUrls: [ './groups.component.scss' ]
+})
+export class GroupRegisterDialogComponent {
+  control: FormControl = new FormControl(this.data.name, [Validators.required]);
+
+  constructor(private dialogRef: MatDialogRef<GroupRegisterDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onCancelButtonClick() {
+    this.dialogRef.close();
   }
 }

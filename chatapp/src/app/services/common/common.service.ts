@@ -20,7 +20,10 @@ export class SnapshotData extends CommonData {
 }
 
 export enum FirestoreKeys {
-  users = 'users'
+  users = 'users',
+  groups = 'groups',
+  messages = 'messages',
+  groupsInfo = 'groupsInfo'
 }
 
 export enum RetryConfig {
