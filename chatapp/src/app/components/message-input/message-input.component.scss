@@ -1,0 +1,18 @@
+@import '../../../assets/scss/variables.scss';
+
+.form {
+  display: flex;
+  align-items: center;
+
+  &_field {
+    flex: auto;
+
+    &_input {
+    }
+  }
+
+  &_button {
+    flex: none;
+    margin-left: 1rem;
+  }
+}

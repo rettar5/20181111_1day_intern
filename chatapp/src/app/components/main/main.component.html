@@ -9,21 +9,7 @@
 
       <!-- ユーザ情報 -->
       <div class='main_submenu_userinfo'>
-        <img [src]='loginUser?.picture || "assets/images/dummy.gif"' class='main_submenu_userinfo_picture'>
-
-        <div class='main_submenu_userinfo_texts'>
-          <div class='main_submenu_userinfo_texts_name'>
-            {{ loginUser?.name }}
-          </div>
-
-          <div class='main_submenu_userinfo_texts_email'>
-            {{ loginUser?.email }}
-          </div>
-
-          <div class='main_submenu_userinfo_texts_logout'>
-            <a (click)='onLogoutButtonClick($event)'>ログアウト</a>
-          </div>
-        </div>
+        <app-login-user-profile [user]='loginUser'></app-login-user-profile>
       </div>
     </div>
   </mat-drawer>
@@ -39,10 +25,7 @@
 
     <!-- メッセージ入力欄 -->
     <div class='main_timeline_form'>
-      <mat-form-field class='main_timeline_form_field'>
-        <input matInput placeholder='メッセージを入力…' class='main_timeline_form_field_input'>
-      </mat-form-field>
-      <button mat-raised-button class='main_timeline_form_button'>投稿</button>
+      <app-message-input [user]='loginUser'></app-message-input>
     </div>
   </div>
 </mat-drawer-container>

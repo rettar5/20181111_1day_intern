@@ -1,0 +1,17 @@
+<div class='user'>
+  <img [src]='user?.picture || "assets/images/dummy.gif"' class='user_picture'>
+
+  <div class='user_texts'>
+    <div class='user_texts_name'>
+      {{ user?.name }}
+    </div>
+
+    <div class='user_texts_email'>
+      {{ user?.email }}
+    </div>
+
+    <div class='user_texts_logout'>
+      <a (click)='onLogoutButtonClick($event)'>ログアウト</a>
+    </div>
+  </div>
+</div>

@@ -13,13 +13,17 @@ import { firebaseConfig } from '../environments/firebase.config';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { BaseComponent } from './components/base/base.component';
+import { LoginUserProfileComponent } from './components/login-user-profile/login-user-profile.component';
+import { MessageInputComponent } from './components/message-input/message-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
-    BaseComponent
+    BaseComponent,
+    LoginUserProfileComponent,
+    MessageInputComponent
   ],
   imports: [
     BrowserModule,

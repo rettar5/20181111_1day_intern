@@ -48,17 +48,4 @@ export class MainComponent extends BaseComponent implements OnInit {
       }
     });
   }
-
-  /** ログアウトのリンクをクリックした際 */
-  onLogoutButtonClick(event: MouseEvent) {
-    this.logout();
-  }
-
-  /** ログアウト */
-  private logout() {
-    // ローカルストレージに保存したすべてのデータを削除
-    DataStoreService.clear();
-    // ログイン画面に遷移
-    this.router.navigate(['/login']);
-  }
 }

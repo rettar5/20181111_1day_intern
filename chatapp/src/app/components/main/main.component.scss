@@ -25,42 +25,7 @@ $timelinePadding: 0px 2rem;
       flex: none;
       padding: 1rem 1rem;
       border-top: solid 1px $borderColor;
-      display: flex;
-      overflow: hidden;
 
-      &_picture {
-        height: 2rem;
-        width: 2rem;
-        border-radius: 50%;
-        flex: none;
-      }
-
-      &_texts {
-        margin-left: 0.5rem;
-        overflow: hidden;
-        flex: auto;
-        min-height: 2rem + $fontSize;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-
-        &_name,
-        &_email {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-
-        &_email {
-          color: $fontCaptionColor;
-          font-size: $fontCaptionSize;
-        }
-
-        &_logout {
-          text-align: right;
-          font-size: $fontCaptionSize;
-        }
-      }
     }
   }
 
@@ -94,20 +59,6 @@ $timelinePadding: 0px 2rem;
       padding: $timelinePadding;
       margin-top: 1rem;
       flex: none;
-      display: flex;
-      align-items: center;
-
-      &_field {
-        flex: auto;
-
-        &_input {
-        }
-      }
-
-      &_button {
-        flex: none;
-        margin-left: 1rem;
-      }
     }
   }
 }
