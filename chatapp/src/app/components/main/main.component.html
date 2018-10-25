@@ -1,27 +1,47 @@
-<mat-drawer-container class="main" autosize>
-  <mat-drawer #drawer class="main_submenu" mode="side" [opened]='shouldShowMenu'>
-    <p>Auto-resizing sidenav</p>
-    <p *ngIf="shouldShowMenu">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="shouldShowMenu = !shouldShowMenu" mat-raised-button>
-      Toggle extra text
-    </button>
+<mat-drawer-container class='main' autosize>
+  <mat-drawer #drawer mode='side' [opened]='shouldShowMenu'>
+    <div class='main_submenu'>
+      <!-- 作成済みグループ一覧 -->
+      <div class='main_submenu_groups'>
+        <!-- TODO: コンポーネント化 -->
+        グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>グループ<br>
+      </div>
 
-    <div>
-      <img *ngIf='loginUser?.picture' [src]='loginUser?.picture' style='width: 1rem; height: 1rem; border-radius: 50%;'>
-      {{ loginUser?.name }}
+      <!-- ユーザ情報 -->
+      <div class='main_submenu_userinfo'>
+        <img [src]='loginUser?.picture || "assets/images/dummy.gif"' class='main_submenu_userinfo_picture'>
+
+        <div class='main_submenu_userinfo_texts'>
+          <div class='main_submenu_userinfo_texts_name'>
+            {{ loginUser?.name }}
+          </div>
+
+          <div class='main_submenu_userinfo_texts_email'>
+            {{ loginUser?.email }}
+          </div>
+
+          <div class='main_submenu_userinfo_texts_logout'>
+            <a (click)='onLogoutButtonClick($event)'>ログアウト</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <button mat-raised-button (click)='onLogoutButtonClick($event)'>Logout</button>
   </mat-drawer>
 
-  <div class="main_timeline">
-    <div class='main_timeline_toggle' (click)="shouldShowMenu = !shouldShowMenu"></div>
+  <div class='main_timeline'>
+    <div class='main_timeline_toggle' (click)='shouldShowMenu = !shouldShowMenu'></div>
 
+    <!-- 投稿済みメッセージ一覧 -->
     <div class='main_timeline_messages'>
+      <!-- TODO: コンポーネント化 -->
       hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>
     </div>
 
+    <!-- メッセージ入力欄 -->
     <div class='main_timeline_form'>
-      <input type='text' class='main_timeline_form_input' />
+      <mat-form-field class='main_timeline_form_field'>
+        <input matInput placeholder='メッセージを入力…' class='main_timeline_form_field_input'>
+      </mat-form-field>
       <button mat-raised-button class='main_timeline_form_button'>投稿</button>
     </div>
   </div>
