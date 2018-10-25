@@ -5,6 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { BaseComponent } from '../base/base.component';
 import { GroupsService, GroupData } from 'src/app/services/groups/groups.service';
 import { FormControl, Validators } from '@angular/forms';
+import { RetryConfig } from 'src/app/services/common/common.service';
 
 interface DialogData {
   name: string;
@@ -26,6 +27,8 @@ export class GroupsComponent extends BaseComponent implements OnInit {
   groupDataMap: Map<string, GroupData> = new Map();
   /** データ読込中フラグ */
   isLoading: boolean = true;
+  /** リトライを行った回数 */
+  private retryCount: number = 0;
 
   constructor(private groupsInfo: GroupsService,
               private dialog: MatDialog) {
@@ -70,7 +73,9 @@ export class GroupsComponent extends BaseComponent implements OnInit {
   private openGroupRegisterDialog() {
     const dialogRef = this.dialog.open(GroupRegisterDialogComponent, {
       // ダイアログの初期値
-      data: { name: '' }
+      data: {
+        name: 'グループ ' + (this.groupDataMap.size + 1)
+      }
     });
 
     dialogRef.afterClosed().subscribe((groupName) => {
@@ -87,7 +92,19 @@ export class GroupsComponent extends BaseComponent implements OnInit {
    * @param groupName 作成するグループ名
    */
   private registerGroup(groupName: string) {
-    console.log('register group!!!!! groupName: ' + groupName);
+    this.groupsInfo.addGroupsInfo(groupName, this.user.id).then((data) => {
+      this.retryCount = 0;
+    }).catch((reason) => {
+      console.error(reason);
+
+      // 一定回数内であれば取得処理をリトライ
+      if (this.retryCount < RetryConfig.max) {
+        this.retryCount++;
+        setTimeout(() => {
+          this.registerGroup(groupName);
+        }, RetryConfig.interval);
+      }
+    });
   }
 }
 
@@ -103,6 +120,7 @@ export class GroupRegisterDialogComponent {
   constructor(private dialogRef: MatDialogRef<GroupRegisterDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+  /** キャンセルボタンがクリックされた際 */
   onCancelButtonClick() {
     this.dialogRef.close();
   }

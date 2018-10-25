@@ -17,16 +17,31 @@ export class GroupsService {
    * @param complete
    */
   observeGroupsInfo(obsrever: (snapshot: firebase.firestore.QuerySnapshot) => void, error?: (error: Error) => void, complete?: () => void): () => void {
-    // TODO: orderをupdatedAtの降順にする
-    return this.afs.collection(FirestoreKeys.groupsInfo).ref.orderBy('createdAt', 'desc').limit(100).onSnapshot(obsrever, error, complete);
+    return this.afs.collection(FirestoreKeys.groupsInfo).ref.orderBy('updatedAt', 'desc').limit(100).onSnapshot(obsrever, error, complete);
+  }
+
+  /** グループを新規作成
+   *
+   * @param groupName 作成するグループ名
+   * @param userId グループの作成ユーザID
+   */
+  addGroupsInfo(groupName: string, userId: string): Promise<firestore.DocumentReference> {
+    const group = new GroupData();
+    group.name = groupName;
+    group.createdBy = this.afs.doc(FirestoreKeys.users + '/' + userId).ref;
+    group.createdAt = firestore.FieldValue.serverTimestamp();
+    group.updatedAt = firestore.FieldValue.serverTimestamp();
+    return this.afs.collection(FirestoreKeys.groupsInfo).add(Object.assign({}, group));
   }
 }
 
 export class GroupData extends SnapshotData {
   name: string;
-  createdBy: UserData | firebase.firestore.DocumentReference;
+  createdBy: UserData | firebase.firestore.DocumentReference | string;
+  createdAt: number | firestore.FieldValue;
+  updatedAt: number | firestore.FieldValue;
 
-  constructor(snapshot: firebase.firestore.QueryDocumentSnapshot | firebase.firestore.DocumentSnapshot) {
+  constructor(snapshot?: firebase.firestore.QueryDocumentSnapshot | firebase.firestore.DocumentSnapshot) {
     super(snapshot);
 
     if (this.createdBy && (this.createdBy instanceof firestore.DocumentReference)) {

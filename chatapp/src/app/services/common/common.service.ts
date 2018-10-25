@@ -1,6 +1,6 @@
 
 export class CommonData {
-  constructor(data: {[key: string]: any}) {
+  constructor(data?: {[key: string]: any}) {
     if (data) {
       // 引数で受け取ったオブジェクトを自身のパラメータにコピー
       Object.keys(data).forEach((key) => {
@@ -13,9 +13,11 @@ export class CommonData {
 export class SnapshotData extends CommonData {
   id: string;
 
-  constructor(snapshot: firebase.firestore.QueryDocumentSnapshot) {
-    super(snapshot.data());
-    this.id = snapshot.id;
+  constructor(snapshot?: firebase.firestore.QueryDocumentSnapshot) {
+    super(snapshot ? snapshot.data() : null);
+    if (snapshot) {
+      this.id = snapshot.id;
+    }
   }
 }
 
