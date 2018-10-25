@@ -13,6 +13,7 @@ export class MessageInputComponent implements OnInit {
   @Input() user: UserData;
   @Input() group: GroupData;
 
+  isProcessing: boolean = false;
   control: FormControl = new FormControl('', Validators.required);
 
   constructor(private messages: MessagesService) { }
@@ -28,16 +29,38 @@ export class MessageInputComponent implements OnInit {
     this.postMessage();
   }
 
+  /** 入力欄でEnterキーがkeyupされた際
+   *
+   * @param event
+   */
+  onEnterKeyup(event: KeyboardEvent) {
+    this.postMessage();
+  }
+
+  /** 入力欄からカーソルが離れた際
+   *
+   * @param event
+   */
+  onInputBlur(event: FocusEvent) {
+    // カーソルが離れた時は、入力欄をデフォルトの表示に戻す
+    this.control.markAsUntouched();
+  }
+
   /** メッセージを投稿 */
   private postMessage() {
-    const text = this.control.value;
-    const userId = this.user.id;
-    const groupId = this.group.id;
+    if (!this.isProcessing) {
+      this.isProcessing = true;
+      const text = this.control.value;
+      const userId = this.user.id;
+      const groupId = this.group.id;
 
-    this.messages.addMessage(groupId, text, userId).then(() => {
-      this.control.reset();
-    }).catch((reason) => {
-      console.error(reason);
-    });
+      this.messages.addMessage(groupId, text, userId).then(() => {
+        this.control.reset();
+        this.isProcessing = false;
+      }).catch((reason) => {
+        console.error(reason);
+        this.isProcessing = false;
+      });
+    }
   }
 }
