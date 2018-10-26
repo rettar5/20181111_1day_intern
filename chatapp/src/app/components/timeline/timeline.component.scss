@@ -7,11 +7,10 @@
 
   &_message {
     display: block;
-    border-top: solid 1px $borderColor;
-    padding: 1rem 0px;
+    padding: 1rem 2rem;
 
-    &:first-of-type {
-      border-top: none;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.04);
     }
   }
 

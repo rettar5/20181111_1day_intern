@@ -2,7 +2,6 @@
 @import '../../../assets/scss/scrollbar.scss';
 
 $toggleHeight: 5rem;
-$timelinePadding: 0px 2rem;
 
 .main {
   height: 100vh;
@@ -17,7 +16,6 @@ $timelinePadding: 0px 2rem;
     &_groups {
       flex: auto;
       overflow: auto;
-      padding: 0px 1rem;
       @include scrollbarStyles();
     }
 
@@ -49,14 +47,13 @@ $timelinePadding: 0px 2rem;
 
     &_messages {
       margin-top: $toggleHeight * -1;
-      padding: $timelinePadding;
       flex: auto;
       overflow: auto;
       @include scrollbarStyles();
     }
 
     &_form {
-      padding: $timelinePadding;
+      padding: 0px 2rem;
       margin-top: 1rem;
       flex: none;
     }

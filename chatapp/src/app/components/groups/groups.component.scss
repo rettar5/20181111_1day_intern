@@ -6,6 +6,8 @@
   }
 
   &_selection {
+    padding: 0rem;
+
     &_list {
       &.selected {
         background-color: rgba(255, 255, 255, 0.2);
@@ -28,6 +30,12 @@
   &_button.cdk-focused.cdk-program-focused {
     .mat-button-focus-overlay {
       display: none;
+    }
+  }
+
+  &_selection_list {
+    > .mat-list-item-content {
+      padding: 0rem 2rem;
     }
   }
 }
