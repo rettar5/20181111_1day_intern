@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { MessagesService, MessageData } from 'src/app/services/messages/messages.service';
 import { UserData } from 'src/app/services/users/users.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
@@ -12,6 +12,9 @@ import { BaseComponent } from '../base/base.component';
 export class TimelineComponent extends BaseComponent implements OnInit, OnChanges {
   @Input() user: UserData;
   @Input() group: GroupData;
+
+  @Output('onInit') onInitEmitter: EventEmitter<null> = new EventEmitter();
+  @Output('onLoad') onLoadEmitter: EventEmitter<null> = new EventEmitter();
 
   messageDataMap: Map<string, MessageData> = new Map();
   isLoading: boolean = true;
@@ -45,6 +48,11 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
         this.messageDataMap.set(message.id, message);
       });
 
+      if (this.isLoading) {
+        this.emitOnInit();
+      } else {
+        this.emitOnLoad();
+      }
       this.isLoading = false;
     }, (error) => {
       console.error(error);
@@ -57,5 +65,15 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
       this.stopObserveFunc();
       this.stopObserveFunc = null;
     }
+  }
+
+  /** メッセージの初回読み込み完了を通知 */
+  private emitOnInit() {
+    this.onInitEmitter.emit();
+  }
+
+  /** メッセージの読み込み完了を通知 */
+  private emitOnLoad() {
+    this.onLoadEmitter.emit();
   }
 }

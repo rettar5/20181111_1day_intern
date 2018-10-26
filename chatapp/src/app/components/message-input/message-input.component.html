@@ -4,7 +4,7 @@
       (keyup.enter)='onEnterKeyup($event)' (blur)='onInputBlur($event)' class='form_field_input'>
   </mat-form-field>
   <button mat-button class='form_button'
-    [disabled]='!control.valid' (click)='onSubmitButtonClick($event)'>
+    [disabled]='(!control.valid) || isProcessing' (click)='onSubmitButtonClick($event)'>
     投稿
   </button>
 </div>

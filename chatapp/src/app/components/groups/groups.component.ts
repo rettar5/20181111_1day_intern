@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, EventEmitter, Output, Inject, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, Inject } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { BaseComponent } from '../base/base.component';

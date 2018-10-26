@@ -17,13 +17,15 @@
     <div class='main_timeline_toggle' (click)='shouldShowMenu = !shouldShowMenu'></div>
 
     <!-- 投稿済みメッセージ一覧 -->
-    <div class='main_timeline_messages'>
-      <app-timeline [user]='loginUser' [group]='selectedGroup'></app-timeline>
+    <div class='main_timeline_messages' #timelineMessages>
+      <app-timeline [user]='loginUser' [group]='selectedGroup'
+        (onInit)='onTimelineInit()' (onLoad)='onTimelineLoad()'>
+      </app-timeline>
     </div>
 
     <!-- メッセージ入力欄 -->
     <div class='main_timeline_form'>
-      <app-message-input [user]='loginUser' [group]='selectedGroup'></app-message-input>
+      <app-message-input [user]='loginUser' [group]='selectedGroup' (onPost)='onMessagePost($event)'></app-message-input>
     </div>
   </div>
 </mat-drawer-container>

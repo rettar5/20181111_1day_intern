@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsersService, UserData } from 'src/app/services/users/users.service';
 import { BaseComponent } from '../base/base.component';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
@@ -12,6 +12,8 @@ import { GroupData } from 'src/app/services/groups/groups.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent extends BaseComponent implements OnInit {
+  @ViewChild('timelineMessages') messagesRef: ElementRef;
+
   /** メニューの表示フラグ */
   shouldShowMenu: boolean = true;
   /** ログイン中のユーザ情報 */
@@ -61,5 +63,38 @@ export class MainComponent extends BaseComponent implements OnInit {
    */
   onGroupSelected(group: GroupData) {
     this.selectedGroup = group;
+  }
+
+  /** タイムラインのメッセージを読み込んだ際（初回） */
+  onTimelineInit() {
+    this.shiftAction(() => {
+      this.scrollBottom();
+    });
+  }
+
+  /** タイムラインのメッセージを読み込んだ際 */
+  onTimelineLoad() {
+    const elem = this.messagesRef.nativeElement;
+    const diff = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
+    // 最下部から100px以上スクロールしていなければ、最下部にスクロール
+    if (diff < 100) {
+      this.shiftAction(() => {
+        this.scrollBottom();
+      });
+    }
+  }
+
+  /** メッセージが投稿された際
+   *
+   * @param messageId
+   */
+  onMessagePost(messageId: string) {
+    this.scrollBottom();
+  }
+
+  /** タイムラインを最下部までスクロール */
+  private scrollBottom() {
+    const elem = this.messagesRef.nativeElement;
+    elem.scrollTop = elem.scrollHeight;
   }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
 import { FormControl, Validators } from '@angular/forms';
-import { MessagesService } from 'src/app/services/messages/messages.service';
+import { MessagesService, MessageData } from 'src/app/services/messages/messages.service';
 
 @Component({
   selector: 'app-message-input',
@@ -12,6 +12,8 @@ import { MessagesService } from 'src/app/services/messages/messages.service';
 export class MessageInputComponent implements OnInit {
   @Input() user: UserData;
   @Input() group: GroupData;
+
+  @Output('onPost') onPostEmitter: EventEmitter<string> = new EventEmitter();
 
   isProcessing: boolean = false;
   control: FormControl = new FormControl('', Validators.required);
@@ -53,14 +55,26 @@ export class MessageInputComponent implements OnInit {
       const text = this.control.value;
       const createdBy = this.user;
       const groupId = this.group.id;
+      // 投稿処理中でも一旦空にする
+      this.control.setValue('');
 
-      this.messages.addMessage(groupId, text, createdBy).then(() => {
+      this.messages.addMessage(groupId, text, createdBy).then((docRef) => {
         this.control.reset();
         this.isProcessing = false;
+        this.emitOnPost(docRef.id);
       }).catch((reason) => {
         console.error(reason);
+        this.control.setValue(text);
         this.isProcessing = false;
       });
     }
+  }
+
+  /** メッセージの投稿を通知
+   *
+   * @param messageId 投稿したメッセージのID
+   */
+  private emitOnPost(messageId: string) {
+    this.onPostEmitter.emit(messageId);
   }
 }
