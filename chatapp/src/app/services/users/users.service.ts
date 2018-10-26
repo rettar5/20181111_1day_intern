@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SnapshotData, FirestoreKeys } from '../common/common.service';
 import { Observable } from 'rxjs';
-import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class UsersService {
    * @param profile Googleで認証した際に取得したユーザ情報
    */
   setUserData(profile: GoogleUserProfile): Promise<void> {
-    const doc = this.afs.doc<UserData>(FirestoreKeys.users + '/' + profile.id);
+    const doc = this.afs.doc<UserData | GoogleUserProfile>(FirestoreKeys.users + '/' + profile.id);
     return doc.set(profile);
   }
 

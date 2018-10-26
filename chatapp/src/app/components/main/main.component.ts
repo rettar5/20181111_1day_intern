@@ -2,14 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsersService, UserData } from 'src/app/services/users/users.service';
 import { BaseComponent } from '../base/base.component';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
-import { RetryConfig, AuthSsrvice } from 'src/app/services/common/common.service';
-import { Router } from '@angular/router';
+import { RetryConfig, AuthSsrvice, Animations } from 'src/app/services/common/common.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  animations: [ Animations.Fadein ]
 })
 export class MainComponent extends BaseComponent implements OnInit {
   @ViewChild('timelineMessages') messagesRef: ElementRef;

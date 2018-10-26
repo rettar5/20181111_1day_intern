@@ -7,9 +7,20 @@ export class CommonData {
   constructor(data?: {[key: string]: any}) {
     if (data) {
       // 引数で受け取ったオブジェクトを自身のパラメータにコピー
+      this.copyParams(data);
+    }
+  }
+
+  /** 引数に指定したオブジェクトのパラメータを自身のパラメータにコピー
+   *  メッセージの参照を変えずに内容を更新する場合等に利用
+   *
+   * @param data コピー元のオブジェクト
+   */
+  copyParams(data: CommonData | {[key: string]: any}) {
+    if (data) {
       Object.keys(data).forEach((key) => {
         this[key] = data[key];
-      })
+      });
     }
   }
 }

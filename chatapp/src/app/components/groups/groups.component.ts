@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { BaseComponent } from '../base/base.component';
 import { GroupsService, GroupData } from 'src/app/services/groups/groups.service';
 import { FormControl, Validators } from '@angular/forms';
-import { RetryConfig } from 'src/app/services/common/common.service';
+import { RetryConfig, Animations } from 'src/app/services/common/common.service';
 
 interface DialogData {
   name: string;
@@ -13,14 +13,15 @@ interface DialogData {
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.scss']
+  styleUrls: ['./groups.component.scss'],
+  animations: [ Animations.Fadein ]
 })
 export class GroupsComponent extends BaseComponent implements OnInit {
   @Input() user: UserData;
   /** 選択中のグループが切り替わった際のイベント通知 */
   @Output('onChange') onChangeEmitter: EventEmitter<GroupData> = new EventEmitter();
 
-  /** 取得したグループの一覧 */
+  /** 取得したグループのマップ */
   groupDataMap: Map<string, GroupData> = new Map();
   /** データ読込中フラグ */
   isLoading: boolean = true;

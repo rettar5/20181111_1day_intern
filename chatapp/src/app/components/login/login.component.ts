@@ -4,11 +4,13 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { UsersService, GoogleUserProfile } from 'src/app/services/users/users.service';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
+import { Animations } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [ Animations.Fadein ]
 })
 export class LoginComponent implements OnInit {
   hasError: boolean = false;

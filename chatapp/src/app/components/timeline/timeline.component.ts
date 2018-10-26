@@ -50,13 +50,17 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
     this.isLoading = true;
     this.stopObserveFunc = this.messages.observeGroupsInfo(groupId, (querySnapshot) => {
       querySnapshot.forEach((queryDocumentSnapshot) => {
-        const message = new MessageData(queryDocumentSnapshot);
+        const newMessage = new MessageData(queryDocumentSnapshot);
 
-        // 新しいメッセージであれば配列に追加
-        if (!this.messageDataMap.has(message.id)) {
-          this.messageDataList.push(message);
+        const oldMessage = this.messageDataMap.get(newMessage.id);
+        if (oldMessage) {
+          // オブジェクトの参照を変えずにデータを更新する
+          oldMessage.copyParams(newMessage);
+        } else {
+          // 未取得のデータであれば追加
+          this.messageDataList.push(newMessage);
+          this.messageDataMap.set(newMessage.id, newMessage);
         }
-        this.messageDataMap.set(message.id, message);
       });
 
       if (this.isLoading) {

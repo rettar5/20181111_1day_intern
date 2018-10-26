@@ -13,7 +13,7 @@
         {{ message.createdBy?.email || message.createdByEmail }}
       </div>
 
-      <div class='message_texts_metadata_date'>
+      <div class='message_texts_metadata_date' *ngIf='0 < message.createdAt?.seconds'>
         {{ (message.createdAt?.seconds * 1000) | date:'MM/dd HH:mm' }}
       </div>
     </div>
