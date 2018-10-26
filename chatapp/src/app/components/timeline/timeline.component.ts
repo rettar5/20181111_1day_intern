@@ -35,6 +35,7 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
   ngOnChanges() {
     this.stopObserveMessages();
     this.messageDataMap.clear();
+    this.messageDataList = [];
 
     if (this.group && this.group.id) {
       this.observeMessages(this.group.id);
