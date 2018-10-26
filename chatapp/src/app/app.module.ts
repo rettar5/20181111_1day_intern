@@ -38,13 +38,13 @@ import { MessageCellComponent } from './components/message-cell/message-cell.com
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     // Angular Fire
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     // Angular Material
-    BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatSidenavModule,

@@ -4,7 +4,7 @@
   </ng-container>
 
   <ng-template #loadedBlock>
-    <app-message-cell *ngFor='let message of getArray(messageDataMap.values())'
+    <app-message-cell *ngFor='let message of messageDataList'
       [user]='user' [message]='message' class='timeline_message'>
     </app-message-cell>
 

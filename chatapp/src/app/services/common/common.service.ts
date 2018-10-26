@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { DataStoreService } from "../data-store/data-store.service";
+import { trigger, transition, style, animate } from "@angular/animations";
 
 export class CommonData {
   constructor(data?: {[key: string]: any}) {
@@ -55,4 +56,13 @@ export const DummyImagePath = 'assets/images/dummy.gif';
 export interface FirestoreDate {
   seconds: number;
   nanoseconds: number;
+}
+
+export class Animations {
+  static Fadein = trigger('appear', [
+    transition('void => *', [
+        style({ opacity: 0 }),
+        animate('500ms ease-in')
+    ])
+  ]);
 }

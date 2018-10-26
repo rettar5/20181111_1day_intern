@@ -16,8 +16,13 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
   @Output('onInit') onInitEmitter: EventEmitter<null> = new EventEmitter();
   @Output('onLoad') onLoadEmitter: EventEmitter<null> = new EventEmitter();
 
+  /** 取得したメッセージのマップ */
   messageDataMap: Map<string, MessageData> = new Map();
+  /** 取得したメッセージの配列 */
+  messageDataList: Array<MessageData> = [];
+  /** データ読込中フラグ */
   isLoading: boolean = true;
+  /** メッセージの監視停止用の関数 */
   private stopObserveFunc: () => void;
 
   constructor(private messages: MessagesService) {
@@ -45,6 +50,11 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
     this.stopObserveFunc = this.messages.observeGroupsInfo(groupId, (querySnapshot) => {
       querySnapshot.forEach((queryDocumentSnapshot) => {
         const message = new MessageData(queryDocumentSnapshot);
+
+        // 新しいメッセージであれば配列に追加
+        if (!this.messageDataMap.has(message.id)) {
+          this.messageDataList.push(message);
+        }
         this.messageDataMap.set(message.id, message);
       });
 

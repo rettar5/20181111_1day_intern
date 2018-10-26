@@ -24,12 +24,12 @@ export class BaseComponent implements OnDestroy {
     this._unsubscribeFuncList.push(func);
   }
 
-  /** Mapを配列に変換（AngularのテンプレートからMap型を反復処理できないため）
+  /** イテレータを配列に変換
    *
-   * @param map キーにstringを持つMap型
+   * @param itr Map.values()等で取得したイテレータ
    */
-  getArray(map: Map<string, any>): any[] {
-    return Array.from(map);
+  getArray(itr: IterableIterator<any>): any[] {
+    return Array.from(itr);
   }
 
   /** タイミングをずらして処理を実行
