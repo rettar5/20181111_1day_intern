@@ -8,7 +8,7 @@
   <ng-template #loadedBlock>
     <!-- グループ一覧 -->
     <mat-selection-list class='groups_selection'>
-      <mat-list-option *ngFor='let group of getArray(groupDataMap?.values()); let idx = index'
+      <mat-list-option *ngFor='let group of groupDataList; let idx = index'
         class='groups_selection_list' (click)='onGroupListClick($event, group, idx)'
         [class.selected]='idx == selectedIndex' [@appear]>
         {{ group.name }}

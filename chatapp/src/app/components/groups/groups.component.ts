@@ -23,6 +23,8 @@ export class GroupsComponent extends BaseComponent implements OnInit {
 
   /** 取得したグループのマップ */
   groupDataMap: Map<string, GroupData> = new Map();
+  /** 取得したグループの配列 */
+  groupDataList: Array<GroupData> = [];
   /** データ読込中フラグ */
   isLoading: boolean = true;
   /** リトライを行った回数 */
@@ -47,8 +49,18 @@ export class GroupsComponent extends BaseComponent implements OnInit {
       // 監視を始めた直後 + データの更新の度に呼び出されるコールバック
       querySnapshot.forEach((queryDocumentSnapShot) => {
         // Snapshotからグループデータを生成
-        const groupData = new GroupData(queryDocumentSnapShot);
-        this.groupDataMap.set(groupData.id, groupData);
+        const fetchedGroupData = new GroupData(queryDocumentSnapShot);
+        // this.groupDataMap.set(groupData.id, groupData);
+
+        const storedGroupData = this.groupDataMap.get(fetchedGroupData.id);
+        if (storedGroupData) {
+          // オブジェクトの参照を変えずにデータを更新する
+          storedGroupData.copyParams(fetchedGroupData);
+        } else {
+          // 未取得のデータであれば追加
+          this.groupDataList.push(fetchedGroupData);
+          this.groupDataMap.set(fetchedGroupData.id, fetchedGroupData);
+        }
       });
 
       if (this.isLoading) {
