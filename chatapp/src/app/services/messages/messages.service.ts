@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { SnapshotData, FirestoreKeys } from '../common/common.service';
+import { SnapshotData, FirestoreKeys, FirestoreDate } from '../common/common.service';
 import { UserData } from '../users/users.service';
 import { firestore } from 'firebase/app';
 
@@ -14,20 +14,22 @@ export class MessagesService {
    *
    * @param groupId 投稿先のグループID
    * @param text 投稿するメッセージ
-   * @param userId 投稿するユーザID
-   * @param userName 投稿するユーザ名
-   * @param userPicture 投稿するユーザの顔写真
+   * @param createdBy 投稿するユーザ情報
    */
-  addMessage(groupId: string, text: string, userId: string, userName?: string, userPicture?: string): Promise<firestore.DocumentReference>  {
+  addMessage(groupId: string, text: string, createdBy: UserData): Promise<firestore.DocumentReference>  {
     const message = new MessageData();
     message.text = text;
-    message.createdBy = this.afs.doc(FirestoreKeys.users + '/' + userId).ref;
-    message.createdByName = userName || null;
-    message.createdByPicture = userPicture || null;
+    // ユーザ情報マスターへの参照をセット
+    message.createdBy = this.afs.doc(FirestoreKeys.users + '/' + createdBy.id).ref;
+    // マスターからデータを取得するまでに表示するキャッシュをセット
+    message.createdByName = createdBy.name || null;
+    message.createdByEmail = createdBy.email || null;
+    message.createdByPicture = createdBy.picture || null;
+    // メッセージがアップロードされた際にサーバ時間が入るようセット
     message.createdAt = firestore.FieldValue.serverTimestamp();
     message.updatedAt = firestore.FieldValue.serverTimestamp();
-    const collectionKey = this.getMessagesCollectionKey(groupId);
 
+    const collectionKey = this.getMessagesCollectionKey(groupId);
     return this.afs.collection(collectionKey).add(Object.assign({}, message));
   }
 
@@ -56,9 +58,10 @@ export class MessageData extends SnapshotData {
   text: string;
   createdBy: UserData | firebase.firestore.DocumentReference | string;
   createdByName: string;
+  createdByEmail: string;
   createdByPicture: string;
-  createdAt: number | firestore.FieldValue;
-  updatedAt: number | firestore.FieldValue;
+  createdAt: FirestoreDate | firestore.FieldValue;
+  updatedAt: FirestoreDate | firestore.FieldValue;
 
   constructor(snapshot?: firebase.firestore.QueryDocumentSnapshot | firebase.firestore.DocumentSnapshot) {
     super(snapshot);

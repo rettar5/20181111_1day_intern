@@ -1,11 +1,24 @@
 <div class='message'>
   <div>
-    <img [src]='message.createdBy?.picture || message.createdByPicture || dummyImagePath' style='width: 2rem; height: 2rem; border-radius: 50%;'>
+    <img [src]='message.createdBy?.picture || message.createdByPicture || dummyImagePath' class='message_picture'>
   </div>
-  <div>
-    {{ message.createdBy?.name || message.createdByName }}
-  </div>
-  <div>
-    {{ message.text }}
+
+  <div class='message_texts'>
+    <div class='message_texts_metadata'>
+      <div class='message_texts_metadata_name'>
+        {{ message.createdBy?.name || message.createdByName }}
+      </div>
+
+      <div class='message_texts_metadata_email'>
+        {{ message.createdBy?.email || message.createdByEmail }}
+      </div>
+
+      <div class='message_texts_metadata_date'>
+        {{ (message.createdAt?.seconds * 1000) | date:'MM/dd HH:mm' }}
+      </div>
+    </div>
+    <div class='message_texts_body'>
+      {{ message.text }}
+    </div>
   </div>
 </div>

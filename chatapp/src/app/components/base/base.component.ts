@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-import { firestore } from 'firebase/app';
 
 @Component({
   selector: 'app-base',

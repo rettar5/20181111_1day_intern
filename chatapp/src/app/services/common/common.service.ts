@@ -51,3 +51,8 @@ export class AuthSsrvice {
 }
 
 export const DummyImagePath = 'assets/images/dummy.gif';
+
+export interface FirestoreDate {
+  seconds: number;
+  nanoseconds: number;
+}

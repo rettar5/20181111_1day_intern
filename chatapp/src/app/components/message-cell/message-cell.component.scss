@@ -1,0 +1,46 @@
+@import '../../../assets/scss/variables.scss';
+
+.message {
+  display: flex;
+
+  &_picture {
+    flex: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+  }
+
+  &_texts {
+    flex: auto;
+    margin-left: 0.5rem;
+
+    &_metadata {
+      display: flex;
+      align-items: center;
+
+      &_name {
+        flex: none;
+      }
+
+      &_email {
+        color: $fontCaptionColor;
+        font-size: $fontCaptionSize;
+        margin-left: 0.5rem;
+        flex: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &_date {
+        color: $fontCaptionColor;
+        font-size: $fontCaptionSize;
+        flex: none;
+      }
+    }
+
+    &_body {
+      margin-top: 0.5rem;
+    }
+  }
+}
