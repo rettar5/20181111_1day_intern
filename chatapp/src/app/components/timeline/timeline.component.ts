@@ -3,11 +3,13 @@ import { MessagesService, MessageData } from 'src/app/services/messages/messages
 import { UserData } from 'src/app/services/users/users.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
 import { BaseComponent } from '../base/base.component';
+import { Animations } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+  styleUrls: ['./timeline.component.scss'],
+  animations: [ Animations.Fadein ]
 })
 export class TimelineComponent extends BaseComponent implements OnInit, OnChanges {
   @Input() user: UserData;
