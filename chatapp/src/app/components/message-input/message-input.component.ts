@@ -50,7 +50,7 @@ export class MessageInputComponent implements OnInit {
 
   /** メッセージを投稿 */
   private postMessage() {
-    if (!this.isProcessing) {
+    if (!this.isProcessing && this.control.valid) {
       this.isProcessing = true;
       const text = this.control.value;
       const createdBy = this.user;
