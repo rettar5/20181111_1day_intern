@@ -4,11 +4,11 @@
   </ng-container>
 
   <ng-template #loadedBlock>
-    <div *ngFor='let message of getArray(messageDataMap.values())'>
-      {{ message.text }}
-    </div>
+    <app-message-cell *ngFor='let message of getArray(messageDataMap.values())'
+      [user]='user' [message]='message' class='timeline_message'>
+    </app-message-cell>
 
-    <div *ngIf='messageDataMap.size < 1'>
+    <div *ngIf='messageDataMap.size < 1' class='timeline_empty'>
       メッセージがありません。
     </div>
   </ng-template>

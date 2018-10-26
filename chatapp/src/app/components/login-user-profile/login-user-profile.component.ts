@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
-import { DataStoreService } from 'src/app/services/data-store/data-store.service';
-import { Router } from '@angular/router';
-import { AuthSsrvice } from 'src/app/services/common/common.service';
+import { AuthSsrvice, DummyImagePath } from 'src/app/services/common/common.service';
 
 @Component({
   selector: 'app-login-user-profile',
@@ -11,6 +9,7 @@ import { AuthSsrvice } from 'src/app/services/common/common.service';
 })
 export class LoginUserProfileComponent implements OnInit {
   @Input() user: UserData;
+  dummyImagePath = DummyImagePath;
 
   constructor(private authService: AuthSsrvice) { }
 

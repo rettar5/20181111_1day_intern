@@ -49,3 +49,5 @@ export class AuthSsrvice {
     this.router.navigate(['/login']);
   }
 }
+
+export const DummyImagePath = 'assets/images/dummy.gif';

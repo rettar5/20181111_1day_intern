@@ -1,0 +1,11 @@
+<div class='message'>
+  <div>
+    <img [src]='message.createdBy?.picture || message.createdByPicture || dummyImagePath' style='width: 2rem; height: 2rem; border-radius: 50%;'>
+  </div>
+  <div>
+    {{ message.createdBy?.name || message.createdByName }}
+  </div>
+  <div>
+    {{ message.text }}
+  </div>
+</div>

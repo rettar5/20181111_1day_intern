@@ -18,6 +18,7 @@ import { MessageInputComponent } from './components/message-input/message-input.
 import { GroupsComponent, GroupRegisterDialogComponent } from './components/groups/groups.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { MessageCellComponent } from './components/message-cell/message-cell.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TimelineComponent } from './components/timeline/timeline.component';
     MessageInputComponent,
     GroupsComponent,
     GroupRegisterDialogComponent,
-    TimelineComponent
+    TimelineComponent,
+    MessageCellComponent
   ],
   imports: [
     BrowserModule,

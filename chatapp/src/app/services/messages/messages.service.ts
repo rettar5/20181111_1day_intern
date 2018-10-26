@@ -15,11 +15,15 @@ export class MessagesService {
    * @param groupId 投稿先のグループID
    * @param text 投稿するメッセージ
    * @param userId 投稿するユーザID
+   * @param userName 投稿するユーザ名
+   * @param userPicture 投稿するユーザの顔写真
    */
-  addMessage(groupId: string, text: string, userId: string): Promise<firestore.DocumentReference>  {
+  addMessage(groupId: string, text: string, userId: string, userName?: string, userPicture?: string): Promise<firestore.DocumentReference>  {
     const message = new MessageData();
     message.text = text;
     message.createdBy = this.afs.doc(FirestoreKeys.users + '/' + userId).ref;
+    message.createdByName = userName || null;
+    message.createdByPicture = userPicture || null;
     message.createdAt = firestore.FieldValue.serverTimestamp();
     message.updatedAt = firestore.FieldValue.serverTimestamp();
     const collectionKey = this.getMessagesCollectionKey(groupId);
@@ -51,6 +55,8 @@ export class MessagesService {
 export class MessageData extends SnapshotData {
   text: string;
   createdBy: UserData | firebase.firestore.DocumentReference | string;
+  createdByName: string;
+  createdByPicture: string;
   createdAt: number | firestore.FieldValue;
   updatedAt: number | firestore.FieldValue;
 

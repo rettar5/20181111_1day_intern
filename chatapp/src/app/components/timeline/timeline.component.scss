@@ -1,6 +1,21 @@
+@import '../../../assets/scss/variables.scss';
 
 .timeline {
   &_progress {
     margin: 2rem auto;
+  }
+
+  &_message {
+    display: block;
+    border-top: solid 1px $borderColor;
+    padding: 1rem 0px;
+
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+
+  &_empty {
+    color: $fontCaptionColor;
   }
 }

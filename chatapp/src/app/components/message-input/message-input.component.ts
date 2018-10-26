@@ -52,9 +52,11 @@ export class MessageInputComponent implements OnInit {
       this.isProcessing = true;
       const text = this.control.value;
       const userId = this.user.id;
+      const userName = this.user.name;
+      const userPicture = this.user.picture;
       const groupId = this.group.id;
 
-      this.messages.addMessage(groupId, text, userId).then(() => {
+      this.messages.addMessage(groupId, text, userId, userName, userPicture).then(() => {
         this.control.reset();
         this.isProcessing = false;
       }).catch((reason) => {
