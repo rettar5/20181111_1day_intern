@@ -1,7 +1,8 @@
 <div class='form'>
   <mat-form-field class='form_field'>
     <input matInput placeholder='メッセージを入力…' [formControl]='control'
-      (keyup.enter)='onEnterKeyup($event)' (blur)='onInputBlur($event)' class='form_field_input'>
+      (keydown.enter)='onEnterKeydown($event)' (keyup.enter)='onEnterKeyup($event)' (blur)='onInputBlur($event)'
+      class='form_field_input'>
   </mat-form-field>
   <button mat-button class='form_button'
     [disabled]='(!control.valid) || isProcessing' (click)='onSubmitButtonClick($event)'>
