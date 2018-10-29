@@ -54,5 +54,13 @@
       "en": "Please input new group name.",
       "zh-cmn-Hans": "请输入新的组名。"
     }
+  },
+
+  "@Timeline": {
+    "emptyMessage": {
+      "ja": "メッセージがありません。",
+      "en": "Message does not exist.",
+      "zh-cmn-Hans": "消息不存在。"
+    }
   }
 }

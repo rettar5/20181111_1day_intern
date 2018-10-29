@@ -9,7 +9,7 @@
     </app-message-cell>
 
     <div *ngIf='messageDataMap.size < 1' class='timeline_empty' [@appear]>
-      メッセージがありません。
+      {{ '@Timeline.emptyMessage' | translate:param }}
     </div>
   </ng-template>
 </div>

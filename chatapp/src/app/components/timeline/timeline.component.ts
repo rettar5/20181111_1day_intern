@@ -4,6 +4,7 @@ import { UserData } from 'src/app/services/users/users.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
 import { BaseComponent } from '../base/base.component';
 import { Animations } from 'src/app/services/common/common.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-timeline',
@@ -27,7 +28,8 @@ export class TimelineComponent extends BaseComponent implements OnInit, OnChange
   /** メッセージの監視停止用の関数 */
   private stopObserveFunc: () => void;
 
-  constructor(private messages: MessagesService) {
+  constructor(private messages: MessagesService,
+              public  translate: TranslateService) {
     super();
   }
 
