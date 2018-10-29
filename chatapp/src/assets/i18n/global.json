@@ -1,0 +1,12 @@
+{
+  "login": {
+    "loginByGoogle": {
+      "ja": "Googleアカウントでログイン",
+      "en": "Login by google account"
+    }
+  },
+  "post": {
+    "ja": "投稿",
+    "en": "Post"
+  }
+}

@@ -6,6 +6,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatListModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { MessageCellComponent } from './components/message-cell/message-cell.com
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot(),
     // Angular Fire
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,

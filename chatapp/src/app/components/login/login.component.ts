@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UsersService, GoogleUserProfile } from 'src/app/services/users/users.service';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
 import { Animations } from 'src/app/services/common/common.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private afAuth: AngularFireAuth,
               private router: Router,
               private users: UsersService,
-              private ngZone: NgZone) { }
+              private ngZone: NgZone,
+              public  translate: TranslateService) { }
 
   ngOnInit() {
   }
