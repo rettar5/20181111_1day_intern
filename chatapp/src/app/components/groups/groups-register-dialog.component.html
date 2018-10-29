@@ -1,15 +1,23 @@
 <div class='dialog'>
-  <h1 mat-dialog-title>グループの新規作成</h1>
+  <h1 mat-dialog-title>
+    {{ '@GroupsRegisterDialog.registerGroup' | translate:param }}
+  </h1>
 
   <div mat-dialog-content class='dialog_content'>
-    <p>グループ名を入力してください。</p>
+    <p>
+      {{ '@GroupsRegisterDialog.inputGroupName' | translate:param }}
+    </p>
     <mat-form-field class='dialog_content_form'>
       <input matInput [formControl]='control'>
     </mat-form-field>
   </div>
 
   <div mat-dialog-actions class='dialog_actions'>
-    <button mat-button (click)="onCancelButtonClick()">キャンセル</button>
-    <button mat-button [mat-dialog-close]="control.value" [disabled]='!control.valid' cdkFocusInitial>作成</button>
+    <button mat-button (click)="onCancelButtonClick()">
+      {{ '@GroupsRegisterDialog.cancel' | translate:param }}
+    </button>
+    <button mat-button [mat-dialog-close]="control.value" [disabled]='!control.valid' cdkFocusInitial>
+      {{ '@GroupsRegisterDialog.create' | translate:param }}
+    </button>
   </div>
 </div>

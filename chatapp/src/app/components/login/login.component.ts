@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private users: UsersService,
               private ngZone: NgZone,
-              public  translate: TranslateService) { }
+              public  translate: TranslateService,
+              private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     // LocalStorageから保存済みの言語を取得
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
       // 例外発生時
       console.error('reason: ', reason);
       this.hasError = true;
+      this.cd.detectChanges();
     });
   }
 

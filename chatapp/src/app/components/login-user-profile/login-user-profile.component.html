@@ -11,7 +11,9 @@
     </div>
 
     <div class='user_texts_logout'>
-      <a (click)='onLogoutButtonClick($event)'>ログアウト</a>
+      <a (click)='onLogoutButtonClick($event)'>
+        {{ '@LoginUserProfile.logout' | translate:param }}
+      </a>
     </div>
   </div>
 </div>

@@ -1,14 +1,58 @@
 {
-  "login": {
+  "@Login": {
     "loginByGoogle": {
       "ja": "Googleアカウントでログイン",
       "en": "Login by google account",
       "zh-cmn-Hans": "通过Google帐户登录"
+    },
+    "loginErrorMessage": {
+      "ja": "ログイン時にエラーが発生しました。<br />時間をおいて再度お試しください。",
+      "en": "Error occurred. <br />Please try again later.",
+      "zh-cmn-Hans": "发生了错误。<br />请稍后再试。"
     }
   },
-  "post": {
-    "ja": "投稿",
-    "en": "Post",
-    "zh-cmn-Hans": "岗位"
+
+  "@MessageInput": {
+    "post": {
+      "ja": "投稿",
+      "en": "Post",
+      "zh-cmn-Hans": "岗位"
+    },
+    "message": {
+      "ja": "メッセージを入力...",
+      "en": "Please input message...",
+      "zh-cmn-Hans": "请输入信息..."
+    }
+  },
+
+  "@LoginUserProfile": {
+    "logout": {
+      "ja": "ログアウト",
+      "en": "Logout",
+      "zh-cmn-Hans": "登出"
+    }
+  },
+
+  "@GroupsRegisterDialog": {
+    "create": {
+      "ja": "作成",
+      "en": "Create",
+      "zh-cmn-Hans": "创建"
+    },
+    "cancel": {
+      "ja": "キャンセル",
+      "en": "Cancel",
+      "zh-cmn-Hans": "取消"
+    },
+    "registerGroup": {
+      "ja": "グループの新規作成",
+      "en": "New group",
+      "zh-cmn-Hans": "注册新组"
+    },
+    "inputGroupName": {
+      "ja": "グループ名を入力してください。",
+      "en": "Please input new group name.",
+      "zh-cmn-Hans": "请输入新的组名。"
+    }
   }
 }

@@ -3,6 +3,7 @@ import { UserData } from 'src/app/services/users/users.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
 import { FormControl, Validators } from '@angular/forms';
 import { MessagesService, MessageData } from 'src/app/services/messages/messages.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-message-input',
@@ -19,7 +20,8 @@ export class MessageInputComponent implements OnInit {
   control: FormControl = new FormControl('', Validators.required);
   enterKeyCode: number;
 
-  constructor(private messages: MessagesService) { }
+  constructor(private messages: MessagesService,
+              public  translate: TranslateService) { }
 
   ngOnInit() {
   }
