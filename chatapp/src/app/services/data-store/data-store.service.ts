@@ -24,12 +24,19 @@ export class DataStoreService {
     localStorage.removeItem(key);
   }
 
-  /** ローカルストレージ内のすべてのオブジェクトを削除 */
+  /** ローカルストレージ内のアプリ用のオブジェクトをすべて削除 */
   static clear() {
-    localStorage.clear();
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.match(LocalStorageKey.prefix)) {
+        this.removeItem(key as LocalStorageKey);
+      }
+    }
   }
 }
 
 export enum LocalStorageKey {
-  loginId = 'chatapp.login.id'
+  prefix = 'chatapp',
+  loginId = 'chatapp.login.id',
+  lang = 'lang'
 }

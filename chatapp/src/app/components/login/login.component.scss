@@ -24,5 +24,11 @@
     &_message {
       text-align: right;
     }
+
+    &_i18n {
+      &_lang {
+        margin-left: 1rem;
+      }
+    }
   }
 }

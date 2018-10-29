@@ -2,11 +2,13 @@
   "login": {
     "loginByGoogle": {
       "ja": "Googleアカウントでログイン",
-      "en": "Login by google account"
+      "en": "Login by google account",
+      "zh-cmn-Hans": "通过Google帐户登录"
     }
   },
   "post": {
     "ja": "投稿",
-    "en": "Post"
+    "en": "Post",
+    "zh-cmn-Hans": "岗位"
   }
 }

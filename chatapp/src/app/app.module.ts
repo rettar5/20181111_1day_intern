@@ -5,7 +5,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatListModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatListModule, MatIconModule, MatProgressSpinnerModule, MatDialogModule, MatRadioModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,6 +56,7 @@ import { MessageCellComponent } from './components/message-cell/message-cell.com
     MatIconModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

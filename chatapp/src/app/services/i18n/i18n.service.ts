@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { DataStoreService, LocalStorageKey } from "../data-store/data-store.service";
 
 const I18nResources = require('../../../assets/i18n/global.json');
 
@@ -8,8 +9,18 @@ interface I18nResourceType {
 
 /** サポートする言語 */
 export const SupportedLangs = [
-  'ja',
-  'en'
+  {
+    code: 'ja',
+    label: '日本語'
+  },
+  {
+    code: 'en',
+    label: 'English'
+  },
+  {
+    code: 'zh-cmn-Hans', // 公用中国語 簡体字
+    label: '中文'
+  }
 ];
 
 @Injectable({
@@ -66,5 +77,13 @@ export class I18nService {
     return keyList.some((listValue) => {
       return key === listValue;
     });
+  }
+
+  static setLang(lang: string) {
+    DataStoreService.setItem(LocalStorageKey.lang, lang);
+  }
+
+  static getLang(): string | 'ja' {
+    return DataStoreService.getItem(LocalStorageKey.lang) || 'ja';
   }
 }

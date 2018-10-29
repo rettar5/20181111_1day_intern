@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { UsersService, GoogleUserProfile } from 'src/app/services/users/users.se
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
 import { Animations } from 'src/app/services/common/common.service';
 import { TranslateService } from '@ngx-translate/core';
+import { MatRadioChange } from '@angular/material';
+import { I18nService, SupportedLangs } from 'src/app/services/i18n/i18n.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,12 @@ import { TranslateService } from '@ngx-translate/core';
   animations: [ Animations.Fadein ]
 })
 export class LoginComponent implements OnInit {
+  /** エラー発生フラグ */
   hasError: boolean = false;
+  /** 選択した言語 */
+  selectedLang: string = 'ja';
+  /** サポートする言語一覧 */
+  supportedLangs = SupportedLangs;
 
   constructor(private afAuth: AngularFireAuth,
               private router: Router,
@@ -23,6 +30,8 @@ export class LoginComponent implements OnInit {
               public  translate: TranslateService) { }
 
   ngOnInit() {
+    // LocalStorageから保存済みの言語を取得
+    this.selectedLang = I18nService.getLang();
   }
 
   /** ログインボタンがクリックされた際
@@ -62,5 +71,16 @@ export class LoginComponent implements OnInit {
     this.ngZone.run(() => {
       this.router.navigate(['/main']);
     });
+  }
+
+  /** 選択中の言語が変わった際
+   *
+   * @param event
+   */
+  onLangRadioChange(event: MatRadioChange) {
+    // 選択した言語をローカルストレージに保存
+    I18nService.setLang(this.selectedLang);
+    // 表示を選択した言語に切り替え
+    this.translate.use(this.selectedLang);
   }
 }
