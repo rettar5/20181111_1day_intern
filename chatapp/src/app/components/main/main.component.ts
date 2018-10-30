@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsersService, UserData } from 'src/app/services/users/users.service';
 import { BaseComponent } from '../base/base.component';
 import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
-import { RetryConfig, AuthSsrvice, Animations } from 'src/app/services/common/common.service';
+import { RetryConfig, Animations } from 'src/app/services/common/common.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -24,7 +25,7 @@ export class MainComponent extends BaseComponent implements OnInit {
   private retryCount: number = 0;
 
   constructor(private users: UsersService,
-              private authService: AuthSsrvice) {
+              private authService: AuthService) {
     super();
   }
 

@@ -41,6 +41,6 @@ describe('MainComponent', () => {
       group.name = 'NEW_GROUP_' + Date.now();
       component.onGroupSelected(group);
       expect(component.selectedGroup.name).toBe(group.name);
-    })
-  })
+    });
+  });
 });

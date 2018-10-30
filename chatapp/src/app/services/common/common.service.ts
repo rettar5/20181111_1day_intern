@@ -1,6 +1,3 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { DataStoreService } from "../data-store/data-store.service";
 import { trigger, transition, style, animate } from "@angular/animations";
 
 export class CommonData {
@@ -46,20 +43,6 @@ export enum FirestoreKeys {
 export enum RetryConfig {
   max = 5,
   interval = 3
-}
-
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthSsrvice {
-  constructor(private router: Router) {}
-
-  logout() {
-    // ローカルストレージに保存したすべてのデータを削除
-    DataStoreService.clear();
-    // ログイン画面に遷移
-    this.router.navigate(['/login']);
-  }
 }
 
 export const DummyImagePath = 'assets/images/dummy.gif';

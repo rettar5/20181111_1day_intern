@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserData } from 'src/app/services/users/users.service';
-import { AuthSsrvice, DummyImagePath } from 'src/app/services/common/common.service';
+import { DummyImagePath } from 'src/app/services/common/common.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login-user-profile',
@@ -12,7 +13,7 @@ export class LoginUserProfileComponent implements OnInit {
   @Input() user: UserData;
   dummyImagePath = DummyImagePath;
 
-  constructor(private authService: AuthSsrvice,
+  constructor(private authService: AuthService,
               public  translate: TranslateService) { }
 
   ngOnInit() {
