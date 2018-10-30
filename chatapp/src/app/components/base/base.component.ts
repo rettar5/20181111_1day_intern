@@ -13,6 +13,7 @@ export class BaseComponent implements OnDestroy {
     // コンポーネントを破棄する際に、Firestoreの監視を停止
     this._unsubscribeFuncList.forEach((func) => {
       func();
+      func = null;
     });
   }
 
@@ -38,5 +39,10 @@ export class BaseComponent implements OnDestroy {
    */
   shiftAction(action: () => void) {
     setTimeout(action);
+  }
+
+  /** For unit test */
+  public get unsubscribeFuncList(): (() => void)[] {
+    return this._unsubscribeFuncList;
   }
 }
