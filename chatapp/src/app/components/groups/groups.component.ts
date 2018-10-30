@@ -50,7 +50,6 @@ export class GroupsComponent extends BaseComponent implements OnInit {
       querySnapshot.forEach((queryDocumentSnapShot) => {
         // Snapshotからグループデータを生成
         const fetchedGroupData = new GroupData(queryDocumentSnapShot);
-        // this.groupDataMap.set(groupData.id, groupData);
 
         const storedGroupData = this.groupDataMap.get(fetchedGroupData.id);
         if (storedGroupData) {

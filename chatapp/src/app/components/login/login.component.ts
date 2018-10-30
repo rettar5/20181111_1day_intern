@@ -80,9 +80,17 @@ export class LoginComponent implements OnInit {
    * @param event
    */
   onLangRadioChange(event: MatRadioChange) {
+    this.changeLang(this.selectedLang);
+  }
+
+  /** 使用する言語を切り替え
+   *
+   * @param lang 変更する言語
+   */
+  changeLang(lang: string) {
     // 選択した言語をローカルストレージに保存
-    I18nService.setLang(this.selectedLang);
+    I18nService.setLang(lang);
     // 表示を選択した言語に切り替え
-    this.translate.use(this.selectedLang);
+    this.translate.use(lang);
   }
 }
