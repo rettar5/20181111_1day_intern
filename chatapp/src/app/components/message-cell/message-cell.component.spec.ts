@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { APP_BASE_HREF } from '@angular/common';
+import { AppModuleDeclarations, AppModuleImports } from '../../app.module';
 
 import { MessageCellComponent } from './message-cell.component';
 
@@ -8,7 +10,14 @@ describe('MessageCellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageCellComponent ]
+      declarations: AppModuleDeclarations,
+      imports: AppModuleImports,
+      providers: [
+        {
+          provide: APP_BASE_HREF,
+          useValue : '/'
+        }
+      ]
     })
     .compileComponents();
   }));

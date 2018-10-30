@@ -21,43 +21,47 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MessageCellComponent } from './components/message-cell/message-cell.component';
 
+export const AppModuleDeclarations = [
+  AppComponent,
+  LoginComponent,
+  MainComponent,
+  BaseComponent,
+  LoginUserProfileComponent,
+  MessageInputComponent,
+  GroupsComponent,
+  GroupRegisterDialogComponent,
+  TimelineComponent,
+  MessageCellComponent
+];
+
+export const AppModuleImports = [
+  BrowserModule,
+  AppRoutingModule,
+  FormsModule,
+  ReactiveFormsModule,
+  BrowserAnimationsModule,
+  TranslateModule.forRoot(),
+  // Angular Fire
+  AngularFireModule.initializeApp(firebaseConfig),
+  AngularFirestoreModule,
+  AngularFireAuthModule,
+  AngularFireStorageModule,
+  // Angular Material
+  MatButtonModule,
+  MatCheckboxModule,
+  MatSidenavModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatListModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatDialogModule,
+  MatRadioModule,
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    MainComponent,
-    BaseComponent,
-    LoginUserProfileComponent,
-    MessageInputComponent,
-    GroupsComponent,
-    GroupRegisterDialogComponent,
-    TimelineComponent,
-    MessageCellComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot(),
-    // Angular Fire
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
-    // Angular Material
-    MatButtonModule,
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatDialogModule,
-    MatRadioModule,
-  ],
+  declarations: AppModuleDeclarations,
+  imports: AppModuleImports,
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
