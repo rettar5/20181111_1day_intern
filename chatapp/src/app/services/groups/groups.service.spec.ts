@@ -5,7 +5,7 @@ import { AppModuleDeclarations, AppModuleImports } from '../../app.module';
 
 import { GroupsService } from './groups.service';
 
-describe('GroupsInfoService', () => {
+describe('GroupsService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     declarations: AppModuleDeclarations,
     imports: AppModuleImports,

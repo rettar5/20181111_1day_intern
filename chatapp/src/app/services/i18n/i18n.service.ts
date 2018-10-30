@@ -30,9 +30,10 @@ export class I18nService {
   /** 多言語リソースから指定した言語のみを取得
    *
    * @param lang 取得する言語
+   * @param resouces
    */
-  static getResource(lang: string): I18nResourceType | null {
-    return this.getLocalizedResource(I18nResources, lang) as I18nResourceType || null;
+  static getResource(lang: string, resouces: I18nResourceType = I18nResources): I18nResourceType | null {
+    return this.getLocalizedResource(resouces, lang) as I18nResourceType || null;
   }
 
   /** 多言語リソースから、localeが指定されたオブジェクトのみを取得
@@ -54,7 +55,7 @@ export class I18nService {
           obj = data[lang];
         }
         break;
-      } else if ('object' === typeof value) {
+      } else if ('object' === typeof value && null !== value) {
         // dataの中に、さらにオブジェクトが続くケース
         const nested = this.getLocalizedResource(value, lang);
         if (nested) {
@@ -79,10 +80,15 @@ export class I18nService {
     });
   }
 
+  /** 使用する言語情報をローカルストレージに保存
+   *
+   * @param lang 言語コード
+   */
   static setLang(lang: string) {
     DataStoreService.setItem(LocalStorageKey.lang, lang);
   }
 
+  /** ローカルストレージに保存した言語情報を取得 */
   static getLang(): string | 'ja' {
     return DataStoreService.getItem(LocalStorageKey.lang) || 'ja';
   }
