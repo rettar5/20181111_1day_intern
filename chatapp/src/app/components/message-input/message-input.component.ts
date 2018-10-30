@@ -16,8 +16,11 @@ export class MessageInputComponent implements OnInit {
 
   @Output('onPost') onPostEmitter: EventEmitter<string> = new EventEmitter();
 
+  /** メッセージ投稿処理中フラグ */
   isProcessing: boolean = false;
+  /** メッセージ入力欄のフォームコントロール */
   control: FormControl = new FormControl('', Validators.required);
+  /** エンターキーのキーコード保存用 */
   enterKeyCode: number;
 
   constructor(private messages: MessagesService,

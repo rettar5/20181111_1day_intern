@@ -31,4 +31,14 @@ describe('MessageInputComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('onEnterKeydown()', () => {
+    it('入力されたキーコードが保存されること', () => {
+      expect(component.enterKeyCode).toBeUndefined();
+
+      const rand = Math.floor(Math.random() * 100);
+      component.onEnterKeydown({ which: rand } as KeyboardEvent);
+      expect(component.enterKeyCode).toBe(rand);
+    });
+  });
 });
