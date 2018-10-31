@@ -4,9 +4,11 @@
   </ng-container>
 
   <ng-template #loadedBlock>
-    <app-message-cell *ngFor='let message of messageDataList'
-      [user]='user' [message]='message' class='timeline_message'>
-    </app-message-cell>
+    <div class='timeline_messages'>
+      <app-message-cell *ngFor='let message of messageDataList'
+        [user]='user' [message]='message' class='timeline_messages_cell'>
+      </app-message-cell>
+    </div>
 
     <div *ngIf='messageDataMap.size < 1' class='timeline_empty' [@appear]>
       {{ '@Timeline.emptyMessage' | translate:param }}

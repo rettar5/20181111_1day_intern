@@ -5,18 +5,27 @@ import { firebaseConfig } from '../../src/environments/firebase.config';
 import { accountConfig } from '../account.config';
 import { LoginUserProfilePage } from './login-user-profile.po';
 import { GroupsPage } from './groups.po';
+import { TimelinePage } from './timeline.po';
+import { MessageCellPage } from './message-cell.po';
+import { MessageInputPage } from './message-input.po';
 
 describe('chatapp e2e test', () => {
   let appPage: AppPage;
   let loginPage: LoginPage;
   let loginUserProfilePage: LoginUserProfilePage;
   let groupsPage: GroupsPage;
+  let timelinePage: TimelinePage;
+  let messageCellPage: MessageCellPage;
+  let messageInputPage: MessageInputPage;
 
   beforeEach(() => {
     appPage = new AppPage();
     loginPage = new LoginPage();
     loginUserProfilePage = new LoginUserProfilePage();
     groupsPage = new GroupsPage();
+    timelinePage = new TimelinePage();
+    messageCellPage = new MessageCellPage();
+    messageInputPage = new MessageInputPage();
   });
 
   it('ログイン画面が表示されること', () => {
@@ -99,9 +108,9 @@ describe('chatapp e2e test', () => {
   });
 
   describe('メイン画面', () => {
+    let newGroupName: string;
     describe('グループ新規作成', () => {
       let registerdGroupName: string;
-      let newGroupName: string;
 
       it('初期処理', () => {
         newGroupName = 'E2E テスト ' + Math.floor(Math.random() * 100);
@@ -169,6 +178,56 @@ describe('chatapp e2e test', () => {
           return groupsPage.getSelectionsText();
         }).then((text) => {
           expect(text).toEqual(registerdGroupName + '\n' + newGroupName);
+        });
+      });
+    });
+
+    describe('タイムライン切り替え', () => {
+      it('最後に投稿されたメッセージを取得', () => {
+        timelinePage.getLastMessageElement().then((elem) => {
+          expect(elem).toBeTruthy();
+        });
+      });
+
+      it('作成したグループに切り替え', () => {
+        groupsPage.clickGroupByText(newGroupName);
+      });
+
+      it('メッセージが投稿されていないこと', () => {
+        timelinePage.waitTimelineLoad().then(() => {
+          expect(timelinePage.isPresentEmpty()).toBeTruthy();
+        });
+      });
+    });
+
+    describe('メッセージ投稿', () => {
+      const baseMessage = 'abc123あいうえおアイウエオ安以宇衣於';
+
+      it('投稿ボタンからメッセージが投稿できること', () => {
+        const message = baseMessage + ' ' + Date.now();
+        messageInputPage.setMessage(message).then(() => {
+          return messageInputPage.clickPostButton();
+        }).then(() => {
+          return timelinePage.getLastMessageElement();
+        }).then((element) => {
+          return messageCellPage.getBodyTextFromElement(element);
+        }).then((text) => {
+          expect(text).toEqual(message);
+        });
+      });
+
+      it('エンターキーからメッセージが投稿できること', () => {
+        const message = baseMessage + ' ' + Date.now();
+        appPage.sleep(100).then(() => {
+          return messageInputPage.setMessage(message);
+        }).then(() => {
+          return messageInputPage.sendEnterKey();
+        }).then(() => {
+          return timelinePage.getLastMessageElement();
+        }).then((element) => {
+          return messageCellPage.getBodyTextFromElement(element);
+        }).then((text) => {
+          expect(text).toEqual(message);
         });
       });
     });

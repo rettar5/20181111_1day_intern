@@ -5,6 +5,7 @@ namespace selectors {
   export const component = 'app-groups';
   export const button = component + ' .groups_button';
   export const selections = component + ' .groups_selection';
+  export const selectionsList = component + ' .groups_selection_list';
 
   export const dialogComponent = 'app-groups-register-dialog';
   export const dialog = {
@@ -42,6 +43,10 @@ export class GroupsPage {
     }).then(() => {
       return element(by.css(selectors.selections)).getText();
     });
+  }
+
+  clickGroupByText(groupName: string) {
+    return element(by.cssContainingText(selectors.selectionsList, groupName)).click();
   }
 
 
