@@ -9,7 +9,8 @@
     </button>
 
     <mat-radio-group class='login_contents_i18n' [(ngModel)]='selectedLang' (change)='onLangRadioChange($event)'>
-      <mat-radio-button *ngFor='let lang of supportedLangs' [value]='lang.code' class='login_contents_i18n_lang'>
+      <mat-radio-button *ngFor='let lang of supportedLangs' [value]='lang.code'
+        [class]='"login_contents_i18n_lang " + lang.code'>
         {{ lang.label }}
       </mat-radio-button>
     </mat-radio-group>
