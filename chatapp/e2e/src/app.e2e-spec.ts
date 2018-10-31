@@ -1,6 +1,8 @@
 import { AppPage } from './app.po';
 import { LoginPage } from './login.po';
-const account = require('../account.json');
+
+import { firebaseConfig } from '../../src/environments/firebase.config';
+import { accountConfig } from '../account.config';
 
 describe('chatapp e2e test', () => {
   let appPage: AppPage;
@@ -42,33 +44,25 @@ describe('chatapp e2e test', () => {
         }).then((handles) => {
           return appPage.switchWindow(handles[handles.length - 1]);
         }).then(() => {
-          return appPage.wait(() => {
-            return loginPage.isPresentAuthPopupSubtext();
-          });
-        }).then(() => {
-          return loginPage.getAuthPopupSubtext();
+          return loginPage.getGoogleAuthSubtext();
         }).then((text) => {
-          return expect(text).toMatch('dayintern-abdcd.firebaseapp.com');
+          return expect(text).toMatch(firebaseConfig.authDomain);
         });
       });
 
       it('Emailが入力できること', () => {
-        const email = account['email'];
-        loginPage.setAuthPopupEmail(email).then(() => {
-          return loginPage.clickAuthPopupNext();
+        const email = accountConfig.email;
+        loginPage.setGoogleAuthEmail(email).then(() => {
+          return loginPage.clickGoogleAuthNext();
         }).then(() => {
-          return appPage.wait(() => {
-            return loginPage.isPresentAuthPopupIdentifier();
-          });
-        }).then(() => {
-          expect(loginPage.getAuthPopupIdentifierText()).toEqual(email);
+          expect(loginPage.getGoogleAuthIdentifierText()).toEqual(email);
         });
       });
 
       it('パスワードが入力できること', () => {
-        const password = account['password'];
-        loginPage.setAuthPopupPass(password).then(() => {
-          return loginPage.clickAuthPopupPassNext();
+        const password = accountConfig.password;
+        loginPage.setGoogleAuthPass(password).then(() => {
+          return loginPage.clickGoogleAuthPassNext();
         });
       });
 

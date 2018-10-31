@@ -1,49 +1,120 @@
 import { by, element } from 'protractor';
+import { AppPage } from './app.po';
 
-const selector = 'app-login';
+namespace selectors {
+  export const component = 'app-login';
+  export const button = component + ' .login_contents_button';
+  export const i18nLang = component + ' .login_contents_i18n_lang';
+
+  export const googleAuth = {
+    subtext: '#headingSubtext',
+    identifierId: '#identifierId',
+    identifierNext: '#identifierNext',
+    profileIdentifier: '#profileIdentifier',
+    passwordInput: '#password input',
+    passwordNext: '#passwordNext'
+  };
+}
 
 export class LoginPage {
+  private appPage: AppPage;
+  private authPage: GoogleAuthPage;
+
+  constructor() {
+    this.appPage = new AppPage();
+    this.authPage = new GoogleAuthPage();
+  }
+
+  private isPresentLoginButton() {
+    return element(by.css(selectors.button)).isPresent();
+  }
+
   getLoginButtonText() {
-    return element(by.css(selector + ' .login_contents_button')).getText();
+    return this.appPage.wait(() => {
+      return this.isPresentLoginButton();
+    }).then(() => {
+      return element(by.css(selectors.button)).getText();
+    });
   }
 
   clickLangButton(lang: string) {
-    return element(by.css(selector + ' .login_contents_i18n_lang.' + lang)).click();
+    return element(by.css(selectors.i18nLang + '.' + lang)).click();
   }
 
   clickLoginButton() {
-    return element(by.css(selector + ' .login_contents_button')).click();
+    return element(by.css(selectors.button)).click();
   }
 
-  isPresentAuthPopupSubtext() {
-    return element(by.css('#headingSubtext')).isPresent();
+
+  getGoogleAuthSubtext() {
+    return this.authPage.getSubtext();
   }
 
-  getAuthPopupSubtext() {
-    return element(by.css('#headingSubtext')).getText();
+  setGoogleAuthEmail(email: string) {
+    return this.authPage.setEmail(email);
   }
 
-  setAuthPopupEmail(email: string) {
-    return element(by.css('#identifierId')).sendKeys(email);
+  clickGoogleAuthNext() {
+    return this.authPage.clickNext();
   }
 
-  clickAuthPopupNext() {
-    return element(by.css('#identifierNext')).click();
+  getGoogleAuthIdentifierText() {
+    return this.authPage.getIdentifierText();
   }
 
-  isPresentAuthPopupIdentifier() {
-    return element(by.css('#profileIdentifier')).isPresent();
+  setGoogleAuthPass(password: string) {
+    return this.authPage.setPass(password);
   }
 
-  getAuthPopupIdentifierText() {
-    return element(by.css('#profileIdentifier')).getText();
+  clickGoogleAuthPassNext() {
+    return this.authPage.clickPassNext();
+  }
+}
+
+class GoogleAuthPage {
+  private appPage: AppPage;
+
+  constructor() {
+    this.appPage = new AppPage();
   }
 
-  setAuthPopupPass(password: string) {
-    return element(by.css('#password input')).sendKeys(password);
+  private isPresentSubtext() {
+    return element(by.css(selectors.googleAuth.subtext)).isPresent();
   }
 
-  clickAuthPopupPassNext() {
-    return element(by.css('#passwordNext')).click();
+  getSubtext() {
+    return this.appPage.wait(() => {
+      return this.isPresentSubtext();
+    }).then(() => {
+      return element(by.css(selectors.googleAuth.subtext)).getText();
+    });
+  }
+
+  setEmail(email: string) {
+    return element(by.css(selectors.googleAuth.identifierId)).sendKeys(email);
+  }
+
+  clickNext() {
+    return element(by.css(selectors.googleAuth.identifierNext)).click();
+  }
+
+  private isPresentIdentifier() {
+    return element(by.css(selectors.googleAuth.profileIdentifier)).isPresent();
+  }
+
+  getIdentifierText() {
+    return this.appPage.wait(() => {
+      return this.isPresentIdentifier();
+    }).then(() => {
+      return element(by.css(selectors.googleAuth.profileIdentifier)).getText();
+    });
+  }
+
+  setPass(password: string) {
+    return element(by.css(selectors.googleAuth.passwordInput)).sendKeys(password);
+  }
+
+  clickPassNext() {
+    return element(by.css(selectors.googleAuth.passwordNext)).click();
   }
 }

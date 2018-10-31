@@ -40,4 +40,4 @@ Thumbs.db
 
 # Environments
 /src/environments/firebase.config.ts
-/e2e/account.json
+/e2e/account.config.ts
