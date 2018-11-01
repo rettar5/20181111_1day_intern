@@ -2,7 +2,7 @@
 
 # 超絶ライブコーディング Angularで作るWEBアプリケーション
 ## Overview
-This is simple chat app by [Angular 7](https://angular.jp/) and Cloud [Firestore](https://firebase.google.com/products/firestore/).   
+This is simple chat app by [Angular 7](https://angular.jp/) and [Cloud Firestore](https://firebase.google.com/products/firestore/).   
 You need not install node.js and angular-cli and etc, then you can try quickly. Because Angular project build on docker.  
 
 <img src='./images/00_overview.png' />
