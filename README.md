@@ -15,7 +15,7 @@ You need not install node.js and angular-cli and etc, then you can try quickly. 
     - `$ git clone https://github.com/rettar5/20181111_1day_intern.git`
     - `$ cd 20181111_1day_intern.git`
 1. Build docker image.
-    - `$ ./bin/build-image` of `$ docker build -t rettar5/1dayintern .`
+    - `$ ./bin/build-image` or `$ docker build -t rettar5/1dayintern .`
 1. Setup authentication of firebase.
     - `$ cp chatapp/src/environments/firebase.config.ts.sample chatapp/src/environments/firebase.config.ts`
     - `$ vi chatapp/src/environments/firebase.config.ts`
