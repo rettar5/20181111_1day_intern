@@ -1,4 +1,4 @@
-import { by, element, Key } from 'protractor';
+import { by, element, Key, browser } from 'protractor';
 import { AppPage } from './app.po';
 
 namespace selectors {
@@ -14,8 +14,16 @@ export class MessageInputPage {
     this.appPage = new AppPage();
   }
 
-  setMessage(message: string) {
-    return element(by.css(selectors.fieldInput)).sendKeys(message);
+  setMessage(message: string, hasEmoji: boolean = false) {
+    if (hasEmoji) {
+      return this.setMessageByScript(message);
+    } else {
+      return element(by.css(selectors.fieldInput)).sendKeys(message);
+    }
+  }
+
+  private setMessageByScript(message: string) {
+    return this.appPage.setTextByScript(element(by.css(selectors.fieldInput)), message);
   }
 
   clickPostButton() {

@@ -201,35 +201,49 @@ describe('chatapp e2e test', () => {
     });
 
     describe('メッセージ投稿', () => {
-      const baseMessage = 'abc123あいうえおアイウエオ安以宇衣於';
+      const testCases = [
+        {
+          base: 'abc123あいうえおアイウエオ安以宇衣於',
+          hasEmoji: false
+        },
+        {
+          base: '🍣',
+          hasEmoji: true
+        }
+      ];
+      const interval = 500;
 
-      it('投稿ボタンからメッセージが投稿できること', () => {
-        const message = baseMessage + ' ' + Date.now();
-        messageInputPage.setMessage(message).then(() => {
-          return messageInputPage.clickPostButton();
-        }).then(() => {
-          return timelinePage.getLastMessageElement();
-        }).then((element) => {
-          return messageCellPage.getBodyTextFromElement(element);
-        }).then((text) => {
-          expect(text).toEqual(message);
+      for(const testCase of testCases) {
+        it('投稿ボタンからメッセージが投稿できること', () => {
+          const message = testCase.base + ' ' + Date.now();
+          appPage.sleep(interval).then(() => {
+            return messageInputPage.setMessage(message, testCase.hasEmoji);
+          }).then(() => {
+            return messageInputPage.clickPostButton();
+          }).then(() => {
+            return timelinePage.getLastMessageElement();
+          }).then((element) => {
+            return messageCellPage.getBodyTextFromElement(element);
+          }).then((text) => {
+            expect(text).toEqual(message);
+          });
         });
-      });
 
-      it('エンターキーからメッセージが投稿できること', () => {
-        const message = baseMessage + ' ' + Date.now();
-        appPage.sleep(100).then(() => {
-          return messageInputPage.setMessage(message);
-        }).then(() => {
-          return messageInputPage.sendEnterKey();
-        }).then(() => {
-          return timelinePage.getLastMessageElement();
-        }).then((element) => {
-          return messageCellPage.getBodyTextFromElement(element);
-        }).then((text) => {
-          expect(text).toEqual(message);
+        it('エンターキーからメッセージが投稿できること', () => {
+          const message = testCase.base + ' ' + Date.now();
+          appPage.sleep(interval).then(() => {
+            return messageInputPage.setMessage(message, testCase.hasEmoji);
+          }).then(() => {
+            return messageInputPage.sendEnterKey();
+          }).then(() => {
+            return timelinePage.getLastMessageElement();
+          }).then((element) => {
+            return messageCellPage.getBodyTextFromElement(element);
+          }).then((text) => {
+            expect(text).toEqual(message);
+          });
         });
-      });
+      }
     });
   });
 });

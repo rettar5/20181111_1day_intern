@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, WebElement, Key } from 'protractor';
 import { config } from '../protractor.conf';
 
 export class AppPage {
@@ -38,5 +38,16 @@ export class AppPage {
 
   setIgnoreSynchronization(isIgnore: boolean) {
     browser.ignoreSynchronization = isIgnore;
+  }
+
+  setTextByScript(element: WebElement, message: string) {
+    return browser.executeScript((elem, str) => {
+      elem.value = str;
+    }, element, message).then(() => {
+      // 空文字を入力し、フォームをDirtyにする
+      element.sendKeys(' ');
+    }).then(() => {
+      element.sendKeys(Key.BACK_SPACE);
+    });
   }
 }
