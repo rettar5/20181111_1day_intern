@@ -16,19 +16,27 @@ export class MessageCellPage {
     this.appPage = new AppPage();
   }
 
-  getBodyTextFromElement(elem: ElementFinder) {
+  getBodyTextByElement(elem: ElementFinder) {
     return elem.element(by.css(selectors.body)).getText();
   }
 
-  getNameTextFormElement(elem: ElementFinder) {
+  getNameTextByElement(elem: ElementFinder) {
     return elem.element(by.css(selectors.name)).getText();
   }
 
-  getEmailTextFormElement(elem: ElementFinder) {
+  getEmailTextByElement(elem: ElementFinder) {
     return elem.element(by.css(selectors.email)).getText();
   }
 
-  getDateTextFormElement(elem: ElementFinder) {
-    return elem.element(by.css(selectors.date)).getText();
+  getDateTextByElement(elem: ElementFinder) {
+    const elemFinder = elem.element(by.css(selectors.date));
+    // 投稿時間はサーバ時間を利用するため取得までに時間がかかる
+    return this.appPage.wait(() => {
+      return elemFinder.getText().then((text) => {
+        return text && 0 < text.length;
+      });
+    }).then(() => {
+      return elemFinder.getText();
+    });
   }
 }

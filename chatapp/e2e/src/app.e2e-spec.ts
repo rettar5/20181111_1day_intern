@@ -112,7 +112,7 @@ describe('chatapp e2e test', () => {
     describe('グループ新規作成', () => {
       let registerdGroupName: string;
 
-      it('初期処理', () => {
+      it('init', () => {
         newGroupName = 'E2E テスト ' + Math.floor(Math.random() * 100);
         groupsPage.getSelectionsText().then((text) => {
           registerdGroupName = text;
@@ -223,7 +223,7 @@ describe('chatapp e2e test', () => {
           }).then(() => {
             return timelinePage.getLastMessageElement();
           }).then((element) => {
-            return messageCellPage.getBodyTextFromElement(element);
+            return messageCellPage.getBodyTextByElement(element);
           }).then((text) => {
             expect(text).toEqual(message);
           });
@@ -238,12 +238,76 @@ describe('chatapp e2e test', () => {
           }).then(() => {
             return timelinePage.getLastMessageElement();
           }).then((element) => {
-            return messageCellPage.getBodyTextFromElement(element);
+            return messageCellPage.getBodyTextByElement(element);
           }).then((text) => {
             expect(text).toEqual(message);
           });
         });
       }
+    });
+
+    describe('投稿されたメッセージ', () => {
+      let postedDate;
+      let lastMessageElement;
+
+      it('init', () => {
+        appPage.sleep(500).then(() => {
+          return messageInputPage.setMessage('なんてことない毎日がトクベツになる');
+        }).then(() => {
+          return messageInputPage.sendEnterKey();
+        }).then(() => {
+          return new Promise((resolve) => {
+            postedDate = new Date();
+            resolve();
+          });
+        }).then(() => {
+          return timelinePage.getLastMessageElement();
+        }).then((element) => {
+          lastMessageElement = element;
+          return appPage.sleep(1000);
+        });
+      });
+
+      it('ユーザ名が表示されていること', () => {
+        messageCellPage.getNameTextByElement(lastMessageElement).then((text) => {
+          expect(text).toEqual(accountConfig.name);
+        });
+      });
+
+      it('メールアドレスが表示されていること', () => {
+        messageCellPage.getEmailTextByElement(lastMessageElement).then((text) => {
+          expect(text).toEqual(accountConfig.email)
+        });
+      });
+
+      it('投稿時間が表示されていること', () => {
+        messageCellPage.getDateTextByElement(lastMessageElement).then((text) => {
+          const month = (postedDate.getMonth() + 1).toString().padStart(2, '0');
+          const day = postedDate.getDate().toString().padStart(2, '0');
+          const hour = postedDate.getHours().toString().padStart(2, '0');
+          const min = postedDate.getMinutes().toString().padStart(2, '0');
+
+          expect(text).toEqual(month + '/' + day + ' ' + hour + ':' + min);
+        });
+      });
+    });
+
+    describe('ログアウト', () => {
+      it('ログイン画面が表示されること', () => {
+        loginUserProfilePage.clickLogoutLink().then(() => {
+          return appPage.waitNaviagte('login');
+        }).then(() => {
+          return appPage.wait(() => {
+            return loginPage.getLoginButtonText().then((text) => {
+              return text && 0 < text.length;
+            });
+          });
+        }).then(() => {
+          return loginPage.getLoginButtonText();
+        }).then((text) => {
+          expect(text).toEqual('Googleアカウントでログイン');
+        });
+      });
     });
   });
 });
