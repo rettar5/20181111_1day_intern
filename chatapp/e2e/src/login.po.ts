@@ -38,7 +38,7 @@ export class LoginPage {
   }
 
   clickLangButton(lang: string) {
-    return element(by.css(selectors.i18nLang + '.' + lang)).click();
+    return element(by.css(selectors.i18nLang + '[data-lang="' + lang + '"]')).click();
   }
 
   clickLoginButton() {
