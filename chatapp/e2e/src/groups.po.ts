@@ -115,7 +115,13 @@ class GroupRegisterDialogPage {
   }
 
   setGroupName(name: string) {
-    return element(by.css(selectors.dialog.input)).sendKeys(name);
+    return this.appPage.wait(() => {
+      return this.isPresentInput();
+    }).then(() => {
+      return this.appPage.sleep();
+    }).then(() => {
+      return element(by.css(selectors.dialog.input)).sendKeys(name);
+    });
   }
 
   clearGroupName() {

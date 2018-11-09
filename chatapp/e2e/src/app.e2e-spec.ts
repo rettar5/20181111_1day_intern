@@ -129,7 +129,7 @@ describe('chatapp e2e test', () => {
 
       it('キャンセルをクリックすると、ダイアログが閉じること', () => {
         groupsPage.clickDialogCancelButton().then(() => {
-          return appPage.sleep(1 * 1000);
+          return appPage.sleep();
         }).then(() => {
           expect(groupsPage.isPresentDialog()).toBeFalsy();
         });
@@ -264,7 +264,7 @@ describe('chatapp e2e test', () => {
           return timelinePage.getLastMessageElement();
         }).then((element) => {
           lastMessageElement = element;
-          return appPage.sleep(1000);
+          return appPage.sleep();
         });
       });
 

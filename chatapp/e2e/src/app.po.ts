@@ -18,7 +18,7 @@ export class AppPage {
     return browser.angularAppRoot();
   }
 
-  sleep(ms: number = 10 * 1000) {
+  sleep(ms: number = 1 * 1000) {
     return browser.sleep(ms);
   }
 

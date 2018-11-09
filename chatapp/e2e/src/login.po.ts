@@ -90,8 +90,16 @@ class GoogleAuthPage {
     });
   }
 
+  private isPresentIdInput() {
+    return element(by.css(selectors.googleAuth.identifierId)).isPresent();
+  }
+
   setEmail(email: string) {
-    return element(by.css(selectors.googleAuth.identifierId)).sendKeys(email);
+    return this.appPage.wait(() => {
+      return this.isPresentIdInput();
+    }).then(() => {
+      return element(by.css(selectors.googleAuth.identifierId)).sendKeys(email);
+    });
   }
 
   clickNext() {
@@ -110,11 +118,29 @@ class GoogleAuthPage {
     });
   }
 
+  private isPresentPassInput() {
+    return element(by.css(selectors.googleAuth.passwordInput)).isPresent();
+  }
+
   setPass(password: string) {
-    return element(by.css(selectors.googleAuth.passwordInput)).sendKeys(password);
+    return this.appPage.wait(() => {
+      return this.isPresentPassInput();
+    }).then(() => {
+      return this.appPage.sleep();
+    }).then(() => {
+      return element(by.css(selectors.googleAuth.passwordInput)).sendKeys(password);
+    });
+  }
+
+  private isPresentPassNext() {
+    return element(by.css(selectors.googleAuth.passwordNext)).isPresent();
   }
 
   clickPassNext() {
-    return element(by.css(selectors.googleAuth.passwordNext)).click();
+    return this.appPage.wait(() => {
+      return this.isPresentPassNext();
+    }).then(() => {
+      return element(by.css(selectors.googleAuth.passwordNext)).click();
+    });
   }
 }
