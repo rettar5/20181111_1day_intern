@@ -11,4 +11,4 @@ CMD echo 'Now running...'; \
     cd /chatapp; \
     ng serve;
 
-EXPOSE 4200
+EXPOSE 4200 9005
