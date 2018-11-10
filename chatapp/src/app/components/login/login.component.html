@@ -5,7 +5,7 @@
     </div>
 
     <button class='login_contents_button' mat-raised-button (click)='onLoginButtonClick($event)'>
-      {{ '@Login.loginByGoogle' | translate:param }}
+      {{ '@Login.loginByGoogle' | translate }}
     </button>
 
     <mat-radio-group class='login_contents_i18n' [(ngModel)]='selectedLang' (change)='onLangRadioChange($event)'>

@@ -6,6 +6,6 @@
   </mat-form-field>
   <button mat-button class='form_button'
     [disabled]='(!control.valid) || isProcessing' (click)='onSubmitButtonClick($event)'>
-    {{ '@MessageInput.post' | translate:param }}
+    {{ '@MessageInput.post' | translate }}
   </button>
 </div>
