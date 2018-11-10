@@ -42,3 +42,4 @@ Thumbs.db
 /src/environments/firebase.config.ts
 /e2e/account.config.ts
 /.firebase
+/.firebaserc
