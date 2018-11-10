@@ -18,7 +18,7 @@ export class MessageInputPage {
     if (hasEmoji) {
       return this.setMessageByScript(message);
     } else {
-      return element(by.css(selectors.fieldInput)).sendKeys(message);
+      // TODO: メッセージを入力する
     }
   }
 
@@ -27,10 +27,10 @@ export class MessageInputPage {
   }
 
   clickPostButton() {
-    return element(by.css(selectors.button)).click();
+    // TODO: クリックする
   }
 
   sendEnterKey() {
-    return element(by.css(selectors.fieldInput)).sendKeys(Key.ENTER);
+    // TODO: Enterキーを入力する
   }
 }

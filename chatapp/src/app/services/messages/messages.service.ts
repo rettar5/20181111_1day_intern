@@ -19,12 +19,14 @@ export class MessagesService {
   addMessage(groupId: string, text: string, createdBy: UserData): Promise<firestore.DocumentReference>  {
     const message = new MessageData();
     message.text = text;
-    // ユーザ情報マスターへの参照をセット
-    message.createdBy = this.afs.doc(FirestoreKeys.users + '/' + createdBy.id).ref;
-    // マスターからデータを取得するまでに表示するキャッシュをセット
-    message.createdByName = createdBy.name || null;
-    message.createdByEmail = createdBy.email || null;
-    message.createdByPicture = createdBy.picture || null;
+    if (createdBy) {
+      // ユーザ情報マスターへの参照をセット
+      message.createdBy = this.afs.doc(FirestoreKeys.users + '/' + createdBy.id).ref;
+      // マスターからデータを取得するまでに表示するキャッシュをセット
+      message.createdByName = createdBy.name || null;
+      message.createdByEmail = createdBy.email || null;
+      message.createdByPicture = createdBy.picture || null;
+    }
     // メッセージがアップロードされた際にサーバ時間が入るようセット
     message.createdAt = firestore.FieldValue.serverTimestamp();
     message.updatedAt = firestore.FieldValue.serverTimestamp();

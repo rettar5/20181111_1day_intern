@@ -114,6 +114,8 @@ class GoogleAuthPage {
     return this.appPage.wait(() => {
       return this.isPresentIdentifier();
     }).then(() => {
+      return this.appPage.sleep();
+    }).then(() => {
       return element(by.css(selectors.googleAuth.profileIdentifier)).getText();
     });
   }
