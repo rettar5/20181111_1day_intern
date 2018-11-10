@@ -148,7 +148,7 @@ export class GroupsComponent extends BaseComponent implements OnInit {
   styleUrls: [ './groups.component.scss' ]
 })
 export class GroupRegisterDialogComponent {
-  control: FormControl = new FormControl(this.data.name, [Validators.required]);
+  control: FormControl = new FormControl(this.data.name, [Validators.required, Validators.maxLength(12)]);
 
   constructor(private dialogRef: MatDialogRef<GroupRegisterDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
