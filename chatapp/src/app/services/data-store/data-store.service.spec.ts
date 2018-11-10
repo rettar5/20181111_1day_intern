@@ -24,33 +24,15 @@ describe('DataStoreService', () => {
   });
 
   describe('getItem()', () => {
-    it('ローカルストレージに保存された文字列が取得できること', () => {
-      const item = DataStoreService.getItem(strKey);
-      expect(item).toBe(str);
-    });
+    // TODO: ローカルストレージに保存された文字列が取得できること
 
-    it('ローカルストレージに保存されたオブジェクトが取得できること', () => {
-      const item = DataStoreService.getItem(objKey);
-      expect(item).toBe(JSON.stringify(obj));
-    });
+    // TODO: ローカルストレージに保存されたオブジェクトが取得できること
   });
 
   describe('removeItem()', () => {
-    it('ローカルストレージに保存された文字列が削除できること', () => {
-      const step1st = DataStoreService.getItem(strKey);
-      expect(step1st).toBe(str);
-      DataStoreService.removeItem(strKey);
-      const step2nd = DataStoreService.getItem(strKey);
-      expect(step2nd).toBeNull();
-    });
+    // TODO: ローカルストレージに保存された文字列が削除できること
 
-    it('ローカルストレージに保存されたオブジェクトが削除できること', () => {
-      const step1st = DataStoreService.getItem(objKey);
-      expect(step1st).toBe(JSON.stringify(obj));
-      DataStoreService.removeItem(objKey);
-      const step2nd = DataStoreService.getItem(objKey);
-      expect(step2nd).toBeNull();
-    });
+    // TODO: ローカルストレージに保存されたオブジェクトが削除できること
   });
 
   describe('clear()', () => {
