@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { UserData } from 'src/app/services/users/users.service';
+import { Component, OnInit } from '@angular/core';
 import { DummyImagePath } from 'src/app/services/common/common.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -10,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login-user-profile.component.scss']
 })
 export class LoginUserProfileComponent implements OnInit {
-  @Input() user: UserData;
+  // TODO: ユーザ情報のバインド
   dummyImagePath = DummyImagePath;
 
   constructor(private authService: AuthService,

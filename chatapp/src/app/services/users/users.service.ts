@@ -33,8 +33,8 @@ export class UsersService {
    * @param id ユーザID
    */
   fetchUserData(id: string): Observable<firebase.firestore.DocumentSnapshot> {
-    const doc = this.afs.doc<UserData>(FirestoreKeys.users + '/' + id);
-    return doc.get();
+    // TODO: ユーザ情報取得取得処理の実装
+    return null;
   }
 }
 

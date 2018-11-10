@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsersService, UserData } from 'src/app/services/users/users.service';
 import { BaseComponent } from '../base/base.component';
-import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
-import { RetryConfig, Animations } from 'src/app/services/common/common.service';
+import { Animations } from 'src/app/services/common/common.service';
 import { GroupData } from 'src/app/services/groups/groups.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -35,27 +34,7 @@ export class MainComponent extends BaseComponent implements OnInit {
 
   /** Firestoreからユーザ情報を取得 */
   private fetchLoginUserData() {
-    // ログイン中のユーザIDを、ローカルストレージから取得
-    const loginId = DataStoreService.getItem(LocalStorageKey.loginId);
-    // ユーザIDを使ってFirestoreからユーザ情報を取得
-    this.users.fetchUserData(loginId).subscribe((snapshot) => {
-      this.retryCount = 0;
-      this.loginUser = new UserData(snapshot);
-    }, (err) => {
-      // 取得に失敗した際
-      console.error(err);
-
-      // 一定回数内であれば取得処理をリトライ
-      if (this.retryCount < RetryConfig.max) {
-        this.retryCount++;
-        setTimeout(() => {
-          this.fetchLoginUserData();
-        }, RetryConfig.interval);
-      } else {
-        // リトライ上限を超えた際はログアウトする
-        this.authService.logout();
-      }
-    });
+    // TODO: ユーザ情報取得処理を実装
   }
 
   /** グループが選択された際

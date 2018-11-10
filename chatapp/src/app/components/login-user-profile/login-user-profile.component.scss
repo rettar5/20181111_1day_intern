@@ -4,12 +4,7 @@
   display: flex;
   overflow: hidden;
 
-  &_picture {
-    height: 2rem;
-    width: 2rem;
-    border-radius: 50%;
-    flex: none;
-  }
+  // TODO: アイコン
 
   &_texts {
     margin-left: 1rem;
@@ -20,17 +15,7 @@
     flex-direction: column;
     justify-content: flex-end;
 
-    &_name,
-    &_email {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    &_email {
-      color: $fontCaptionColor;
-      font-size: $fontCaptionSize;
-    }
+    // TODO: ユーザ名・メールアドレス
 
     &_logout {
       text-align: right;
