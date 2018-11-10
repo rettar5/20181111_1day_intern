@@ -1,0 +1,22 @@
+{
+  "@Login": {
+    "loginByGoogle": "通过Google帐户登录",
+    "loginErrorMessage": "发生了错误。<br />请稍后再试。"
+  },
+  "@MessageInput": {
+    "post": "岗位",
+    "message": "请输入信息..."
+  },
+  "@LoginUserProfile": {
+    "logout": "登出"
+  },
+  "@GroupsRegisterDialog": {
+    "create": "创建",
+    "cancel": "取消",
+    "registerGroup": "注册新组",
+    "inputGroupName": "请输入新的组名。"
+  },
+  "@Timeline": {
+    "emptyMessage": "消息不存在。"
+  }
+}

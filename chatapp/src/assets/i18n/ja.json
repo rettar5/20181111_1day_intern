@@ -1,0 +1,22 @@
+{
+  "@Login": {
+    "loginByGoogle": "Googleアカウントでログイン",
+    "loginErrorMessage": "ログイン時にエラーが発生しました。<br />時間をおいて再度お試しください。"
+  },
+  "@MessageInput": {
+    "post": "投稿",
+    "message": "メッセージを入力..."
+  },
+  "@LoginUserProfile": {
+    "logout": "ログアウト"
+  },
+  "@GroupsRegisterDialog": {
+    "create": "作成",
+    "cancel": "キャンセル",
+    "registerGroup": "グループの新規作成",
+    "inputGroupName": "グループ名を入力してください。"
+  },
+  "@Timeline": {
+    "emptyMessage": "メッセージがありません。"
+  }
+}

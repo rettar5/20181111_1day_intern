@@ -1,0 +1,22 @@
+{
+  "@Login": {
+    "loginByGoogle": "Login by google account",
+    "loginErrorMessage": "Error occurred. <br />Please try again later."
+  },
+  "@MessageInput": {
+    "post": "Post",
+    "message": "Please input message..."
+  },
+  "@LoginUserProfile": {
+    "logout": "Logout"
+  },
+  "@GroupsRegisterDialog": {
+    "create": "Create",
+    "cancel": "Cancel",
+    "registerGroup": "New group",
+    "inputGroupName": "Please input new group name."
+  },
+  "@Timeline": {
+    "emptyMessage": "Message does not exist."
+  }
+}

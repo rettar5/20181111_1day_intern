@@ -1,11 +1,13 @@
 <div class='login' [@appear]>
   <div class='login_contents'>
+    <!-- TODO: 多言語対応 -->
     <div *ngIf='hasError' class='login_contents_message error'
-      [innerHTML]='"@Login.loginErrorMessage" | translate'>
+      [innerHTML]='"ログイン時にエラーが発生しました。<br />時間をおいて再度お試しください。"'>
     </div>
 
     <button class='login_contents_button' mat-raised-button (click)='onLoginButtonClick($event)'>
-      {{ '@Login.loginByGoogle' | translate }}
+      <!-- TODO: 多言語対応 -->
+      Googleアカウントでログイン
     </button>
 
     <mat-radio-group class='login_contents_i18n' [(ngModel)]='selectedLang' (change)='onLangRadioChange($event)'>

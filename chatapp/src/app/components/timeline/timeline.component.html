@@ -11,7 +11,8 @@
     </div>
 
     <div *ngIf='messageDataMap.size < 1' class='timeline_empty' [@appear]>
-      {{ '@Timeline.emptyMessage' | translate }}
+      <!-- TODO: 多言語対応 -->
+      メッセージがありません。
     </div>
   </ng-template>
 </div>

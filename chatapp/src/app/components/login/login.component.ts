@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
               private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    // LocalStorageから保存済みの言語を取得
-    this.selectedLang = I18nService.getLang();
+    // TODO: LocalStorageから保存済みの言語を取得
   }
 
   /** ログインボタンがクリックされた際
@@ -88,9 +87,7 @@ export class LoginComponent implements OnInit {
    * @param lang 変更する言語
    */
   changeLang(lang: string) {
-    // 選択した言語をローカルストレージに保存
-    I18nService.setLang(lang);
-    // 表示を選択した言語に切り替え
-    this.translate.use(lang);
+    // TODO: 選択した言語をローカルストレージに保存
+    // TODO: 表示を選択した言語に切り替え
   }
 }
