@@ -1,11 +1,11 @@
 <div class='dialog'>
   <h1 mat-dialog-title class='dialog_title'>
-    {{ '@GroupsRegisterDialog.registerGroup' | translate:param }}
+    {{ '@GroupsRegisterDialog.registerGroup' | translate }}
   </h1>
 
   <div mat-dialog-content class='dialog_content'>
     <p>
-      {{ '@GroupsRegisterDialog.inputGroupName' | translate:param }}
+      {{ '@GroupsRegisterDialog.inputGroupName' | translate }}
     </p>
     <mat-form-field class='dialog_content_form'>
       <input matInput [formControl]='control' class='dialog_content_form_input'>
@@ -14,11 +14,11 @@
 
   <div mat-dialog-actions class='dialog_actions'>
     <button mat-button (click)="onCancelButtonClick()" class='dialog_actions_cancel'>
-      {{ '@GroupsRegisterDialog.cancel' | translate:param }}
+      {{ '@GroupsRegisterDialog.cancel' | translate }}
     </button>
     <button mat-button [mat-dialog-close]="control.value" [disabled]='!control.valid' cdkFocusInitial
       class='dialog_actions_create'>
-      {{ '@GroupsRegisterDialog.create' | translate:param }}
+      {{ '@GroupsRegisterDialog.create' | translate }}
     </button>
   </div>
 </div>
