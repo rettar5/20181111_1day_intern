@@ -522,7 +522,7 @@
 
 1. `SupportedLangs` をインポートする。
 
-    ```typesceript
+    ```typescript
     import { I18nService, SupportedLangs } from './services/i18n/i18n.service';
     ```
 
