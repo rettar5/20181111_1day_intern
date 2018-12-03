@@ -266,7 +266,7 @@
     ```html
     <div mat-dialog-actions class='dialog_actions'>
       <!-- TODO: キャンセル・作成ボタンの実装 -->
-      <button mat-button (click)='onCancelButtonClick()'class='dialog_actions_cancel'>
+      <button mat-button (click)='onCancelButtonClick()' class='dialog_actions_cancel'>
         キャンセル
       </button>
       <button mat-button class='dialog_actions_create'>
@@ -284,7 +284,7 @@
     
     ```html
     <!-- TODO: キャンセル・作成ボタンの実装 -->
-    <button mat-button (click)='onCancelButtonClick()'class='dialog_actions_cancel'>
+    <button mat-button (click)='onCancelButtonClick()' class='dialog_actions_cancel'>
       キャンセル
     </button>
     <button mat-button [mat-dialog-close]='input?.value' class='dialog_actions_create'>
@@ -314,7 +314,7 @@
     ```html
     <div mat-dialog-actions class='dialog_actions'>
       <!-- TODO: キャンセル・作成ボタンの実装 -->
-      <button mat-button (click)='onCancelButtonClick()'class='dialog_actions_cancel'>
+      <button mat-button (click)='onCancelButtonClick()' class='dialog_actions_cancel'>
         キャンセル
       </button>
       <button mat-button [mat-dialog-close]='control.value' class='dialog_actions_create'>
@@ -326,7 +326,7 @@
     ```html
     <div mat-dialog-actions class='dialog_actions'>
       <!-- TODO: キャンセル・作成ボタンの実装 -->
-      <button mat-button (click)='onCancelButtonClick()'class='dialog_actions_cancel'>
+      <button mat-button (click)='onCancelButtonClick()' class='dialog_actions_cancel'>
         キャンセル
       </button>
       <button mat-button [mat-dialog-close]='control.value' [disabled]='!control.valid' class='dialog_actions_create'>
