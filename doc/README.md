@@ -455,6 +455,12 @@
     }
     ```
 
+1. `I18nService` をインポートする。
+
+    ```typescript
+    import { I18nService } from './services/i18n/i18n.service';
+    ```
+
 ### Step 5-3. テキストの多言語対応化
 1. ログインボタンを多言語対応するため、 `login.component.html` を開く。
 1. `assets/i18n/ja.json` 等の翻訳ファイルを参考に、キーとパイプを設定する。
