@@ -519,6 +519,13 @@
       });
     }
     ```
+
+1. `SupportedLangs` をインポートする。
+
+    ```typesceript
+    import { I18nService, SupportedLangs } from './services/i18n/i18n.service';
+    ```
+
 1. サポートする言語の情報から翻訳用のJSONを取得し、多言語対応用ライブラリに読み込む。
     - メソッド `getResource()` は、 `global.json` の中から指定されたコードの翻訳を取得し、 `ja.json` 等と同じ形式のオブジェクトで返却します。
     ```typescript
