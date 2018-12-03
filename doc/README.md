@@ -85,18 +85,7 @@
 
 ### Step 3-1. ユーザ情報の取得
 1. `main.component.ts` を開く。
-1. メソッド `fetchLoginUserData()` 内で、現在ログインしているユーザのIDを取得する。
-
-    ```typescript
-    /** Firestoreからユーザ情報を取得 */
-    private fetchLoginUserData() {
-      // TODO: ユーザ情報取得処理を実装
-      // ログイン中のユーザIDを、ローカルストレージから取得
-      const loginId = DataStoreService.getItem(LocalStorageKey.loginId);
-    }
-    ```
-
-1. `users.service.ts` のメソッドを利用し、Firestoreのスナップショット（Firestoreのフォーマット）からユーザ情報を取得する。
+1. メソッド `fetchLoginUserData()` 内で、Firestoreのスナップショット（Firestoreのフォーマット）を取得し、ユーザ情報に変換する。
 
     ```typescript
     /** Firestoreからユーザ情報を取得 */
