@@ -101,6 +101,12 @@
     }
     ```
 
+1. `DataStoreService` と `LocalStorageKey` をインポートする。
+
+    ```typescript
+    import { DataStoreService, LocalStorageKey } from 'src/app/services/data-store/data-store.service';
+    ```
+
 1. `users.service.ts` を開く。
 1. メソッド `fetchUserData()` が未実装のため、データ取得処理を実装する。
 
@@ -150,6 +156,13 @@
     // TODO: ユーザ情報のバインド
     @Input() user: UserData;
     dummyImagePath = DummyImagePath;
+    ```
+
+1. `Input` と `UserData` をインポートする。
+
+    ```typescript
+    import { Component, OnInit, Input } from '@angular/core';
+    import { UserData } from 'src/app/services/users/users.service';
     ```
 
 1. 子コンポーネントにユーザ情報が渡ってきているかをチェックする。
